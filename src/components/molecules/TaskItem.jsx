@@ -92,9 +92,9 @@ const TaskItem = ({ task, onUpdate, onDelete, categories }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+animate={{ opacity: 1, y: 0 }}
 exit={{ opacity: 0, y: -20 }}
-      className={`bg-gradient-surface rounded-xl p-4 shadow-memphis hover:shadow-neon transition-all duration-200 hover-lift border-4 border-memphis-blue hover:border-memphis-pink transform hover:rotate-1 ${
+      className={`bg-gradient-surface rounded-xl p-4 shadow-card hover:shadow-hover transition-all duration-200 hover-lift border-2 border-gray-300 hover:border-memphis-pink transform hover:rotate-1 ${
         task.completed ? 'opacity-75 grayscale' : ''
       }`}
     >
