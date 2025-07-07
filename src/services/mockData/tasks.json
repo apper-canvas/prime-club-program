@@ -1,0 +1,98 @@
+[
+  {
+    "Id": 1,
+    "title": "Complete quarterly presentation",
+    "description": "Finalize slides for Q4 business review meeting",
+    "categoryId": 1,
+    "priority": "High",
+    "dueDate": "2024-02-15",
+    "completed": false,
+    "archived": false,
+    "createdAt": "2024-02-01T09:00:00.000Z",
+    "completedAt": null
+  },
+  {
+    "Id": 2,
+    "title": "Review team performance metrics",
+    "description": "Analyze KPIs and prepare feedback for team members",
+    "categoryId": 1,
+    "priority": "Medium",
+    "dueDate": "2024-02-12",
+    "completed": false,
+    "archived": false,
+    "createdAt": "2024-02-01T10:30:00.000Z",
+    "completedAt": null
+  },
+  {
+    "Id": 3,
+    "title": "Schedule dentist appointment",
+    "description": "Book routine cleaning and checkup",
+    "categoryId": 2,
+    "priority": "Low",
+    "dueDate": "2024-02-20",
+    "completed": false,
+    "archived": false,
+    "createdAt": "2024-02-01T14:15:00.000Z",
+    "completedAt": null
+  },
+  {
+    "Id": 4,
+    "title": "Grocery shopping for the week",
+    "description": "Buy vegetables, fruits, and pantry essentials",
+    "categoryId": 2,
+    "priority": "Medium",
+    "dueDate": "2024-02-11",
+    "completed": false,
+    "archived": false,
+    "createdAt": "2024-02-01T16:45:00.000Z",
+    "completedAt": null
+  },
+  {
+    "Id": 5,
+    "title": "Learn React hooks fundamentals",
+    "description": "Complete online course modules on useState and useEffect",
+    "categoryId": 3,
+    "priority": "High",
+    "dueDate": "2024-02-18",
+    "completed": false,
+    "archived": false,
+    "createdAt": "2024-02-01T19:20:00.000Z",
+    "completedAt": null
+  },
+  {
+    "Id": 6,
+    "title": "Plan weekend hiking trip",
+    "description": "Research trails and pack necessary gear",
+    "categoryId": 4,
+    "priority": "Low",
+    "dueDate": "2024-02-16",
+    "completed": false,
+    "archived": false,
+    "createdAt": "2024-02-01T21:00:00.000Z",
+    "completedAt": null
+  },
+  {
+    "Id": 7,
+    "title": "Update project documentation",
+    "description": "Document new features and API changes",
+    "categoryId": 1,
+    "priority": "Medium",
+    "dueDate": "2024-02-14",
+    "completed": true,
+    "archived": false,
+    "createdAt": "2024-01-30T11:30:00.000Z",
+    "completedAt": "2024-02-02T14:22:00.000Z"
+  },
+  {
+    "Id": 8,
+    "title": "Call mom for birthday",
+    "description": "Wish her happy birthday and catch up",
+    "categoryId": 2,
+    "priority": "High",
+    "dueDate": "2024-02-13",
+    "completed": true,
+    "archived": false,
+    "createdAt": "2024-02-01T08:15:00.000Z",
+    "completedAt": "2024-02-02T18:45:00.000Z"
+  }
+]

@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'react-toastify/dist/ReactToastify.css';
+
+/* Custom toast styling */
+.Toastify__toast {
+  @apply font-body text-sm rounded-lg shadow-lg;
+}
+
+.Toastify__toast--success {
+  @apply bg-success text-white;
+}
+
+.Toastify__toast--error {
+  @apply bg-error text-white;
+}
+
+.Toastify__toast--info {
+  @apply bg-info text-white;
+}
+
+.Toastify__toast--warning {
+  @apply bg-warning text-gray-900;
+}
+
+.Toastify__toast-container {
+  @apply w-80;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Task completion animation */
+.task-complete {
+  animation: bounce-subtle 0.3s ease-out;
+}
+
+/* Progress ring animation */
+.progress-ring {
+  transform-origin: center;
+  animation: progress 0.5s ease-out;
+}
+
+/* Confetti animation */
+.confetti {
+  animation: confetti 1s ease-out;
+}
+
+/* Focus styles */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(91, 79, 233, 0.3);
+}
+
+/* Priority pill animations */
+.priority-pill {
+  transition: all 0.15s ease-out;
+}
+
+.priority-pill:hover {
+  transform: scale(1.02);
+}
+
+/* Hover effects */
+.hover-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Checkbox animations */
+.checkbox-custom {
+  transition: all 0.2s ease-out;
+}
+
+.checkbox-custom:checked {
+  background-color: #5B4FE9;
+  border-color: #5B4FE9;
+}
+
+.checkbox-custom:checked::after {
+  content: '✓';
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
