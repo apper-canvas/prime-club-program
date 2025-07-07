@@ -1,5 +1,5 @@
-import { forwardRef } from 'react'
-import { cn } from '@/utils/cn'
+import React, { forwardRef } from "react";
+import { cn } from "@/utils/cn";
 
 const Badge = forwardRef(({ 
   className, 
@@ -9,16 +9,16 @@ const Badge = forwardRef(({
   ...props 
 }, ref) => {
 const variants = {
-    default: 'bg-gradient-surface text-gray-800 border-2 border-memphis-blue',
-    primary: 'bg-gradient-primary text-white border-2 border-memphis-yellow',
-    secondary: 'bg-gradient-success text-black border-2 border-memphis-pink',
-    accent: 'bg-gradient-accent text-black border-2 border-memphis-blue',
-    success: 'bg-memphis-green text-black border-2 border-memphis-blue',
-    warning: 'bg-memphis-yellow text-black border-2 border-memphis-pink',
-    error: 'bg-memphis-pink text-white border-2 border-memphis-yellow',
-    high: 'bg-memphis-pink text-white border-2 border-memphis-yellow shadow-neon',
-    medium: 'bg-memphis-yellow text-black border-2 border-memphis-blue',
-    low: 'bg-gradient-surface text-gray-600 border-2 border-memphis-green'
+    default: 'bg-gray-100 text-gray-700 border border-gray-300',
+    primary: 'bg-blue-600 text-white border border-blue-600',
+    secondary: 'bg-gray-600 text-white border border-gray-600',
+    accent: 'bg-blue-100 text-blue-800 border border-blue-200',
+    success: 'bg-green-100 text-green-800 border border-green-200',
+    warning: 'bg-yellow-100 text-yellow-800 border border-yellow-200',
+    error: 'bg-red-100 text-red-800 border border-red-200',
+    high: 'bg-red-100 text-red-800 border border-red-200',
+    medium: 'bg-yellow-100 text-yellow-800 border border-yellow-200',
+    low: 'bg-gray-100 text-gray-600 border border-gray-200'
   }
 
   const sizes = {
@@ -27,10 +27,10 @@ const variants = {
     lg: 'px-3 py-1 text-base'
   }
 
-  return (
-<span
+return (
+    <span
       className={cn(
-        'inline-flex items-center rounded-xl font-black transition-all duration-200 priority-pill transform hover:rotate-3 hover:scale-110',
+        'inline-flex items-center rounded-md font-medium transition-colors',
         variants[variant],
         sizes[size],
         className

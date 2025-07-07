@@ -8,26 +8,26 @@ const Layout = ({ children }) => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
 
 return (
-    <div className="min-h-screen bg-gradient-memphis">
+<div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-gradient-neon border-b-4 border-memphis-pink px-4 py-3 lg:px-6 shadow-memphis">
+      <header className="bg-white border-b border-gray-200 px-4 py-3 lg:px-6 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileSidebarOpen(true)}
-              className="lg:hidden border-2 border-memphis-blue"
+className="lg:hidden border border-gray-300"
             >
               <ApperIcon name="Menu" size={20} />
             </Button>
             
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-neon transform rotate-12 border-2 border-memphis-yellow">
+<div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
                 <ApperIcon name="CheckSquare" size={20} className="text-white" />
               </div>
-              <h1 className="text-2xl font-display font-black text-memphis-pink transform -rotate-2 drop-shadow-lg">
-                TASKFLOW
+<h1 className="text-2xl font-display font-semibold text-gray-900">
+                TaskFlow
               </h1>
             </div>
           </div>
@@ -65,9 +65,9 @@ return (
                 animate={{ x: 0 }}
 exit={{ x: '-100%' }}
                 transition={{ type: 'tween', duration: 0.3 }}
-                className="fixed left-0 top-0 bottom-0 w-64 bg-gradient-neon z-50 lg:hidden shadow-memphis border-r-4 border-memphis-yellow"
+className="fixed left-0 top-0 bottom-0 w-64 bg-white z-50 lg:hidden shadow-lg border-r border-gray-200"
               >
-                <div className="p-4 border-b-4 border-memphis-pink">
+<div className="p-4 border-b border-gray-200">
                   <div className="flex items-center justify-between">
                     <h2 className="text-lg font-display font-semibold text-gray-900">
                       TaskFlow

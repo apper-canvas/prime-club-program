@@ -6,10 +6,10 @@ const CategoryCard = ({ category, isActive, taskCount }) => {
   return (
 <NavLink
 to={`/category/${category.Id}`}
-      className={`block p-4 rounded-xl border-3 transition-all duration-200 hover:bg-gradient-accent hover-scale transform hover:rotate-1 ${
+className={`block p-4 rounded-lg border transition-colors ${
         isActive 
-          ? 'bg-gradient-primary border-memphis-yellow shadow-card' 
-          : 'border-gray-300 hover:border-memphis-pink bg-gradient-surface'
+          ? 'bg-blue-600 border-blue-600 text-white' 
+          : 'border-gray-300 hover:border-blue-500 bg-white hover:bg-blue-50'
       }`}
     >
       <div className="flex items-center justify-between">
@@ -21,8 +21,8 @@ to={`/category/${category.Id}`}
             <ApperIcon name={category.icon} size={16} />
           </div>
           <div>
-            <h3 className={`font-medium ${
-              isActive ? 'text-primary' : 'text-gray-900'
+<h3 className={`font-medium ${
+              isActive ? 'text-white' : 'text-gray-900'
             }`}>
               {category.name}
             </h3>

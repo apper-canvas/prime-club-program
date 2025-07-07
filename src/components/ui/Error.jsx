@@ -10,7 +10,7 @@ const Error = ({ message = 'Something went wrong', onRetry }) => {
         animate={{ opacity: 1, y: 0 }}
         className="text-center max-w-md mx-auto"
       >
-        <div className="w-16 h-16 bg-gradient-to-r from-error to-accent rounded-full flex items-center justify-center mx-auto mb-6">
+<div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
           <ApperIcon name="AlertTriangle" size={32} className="text-white" />
         </div>
         

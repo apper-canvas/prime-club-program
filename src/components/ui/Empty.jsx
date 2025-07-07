@@ -13,7 +13,7 @@ const Empty = ({
       animate={{ opacity: 1, y: 0 }}
       className="text-center py-12 px-6"
     >
-      <div className="w-24 h-24 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+<div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
         <ApperIcon name="CheckSquare" size={48} className="text-white" />
       </div>
       
@@ -41,24 +41,24 @@ const Empty = ({
       
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-lg mx-auto">
         <div className="text-center">
-          <div className="w-12 h-12 bg-success/10 rounded-lg flex items-center justify-center mx-auto mb-2">
-            <ApperIcon name="Zap" size={24} className="text-success" />
+<div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+<ApperIcon name="Zap" size={24} className="text-green-600" />
           </div>
           <h3 className="font-medium text-gray-900">Quick Add</h3>
           <p className="text-sm text-gray-600">Add tasks instantly with Enter</p>
         </div>
         
         <div className="text-center">
-          <div className="w-12 h-12 bg-warning/20 rounded-lg flex items-center justify-center mx-auto mb-2">
-            <ApperIcon name="Tag" size={24} className="text-warning" />
+<div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+<ApperIcon name="Tag" size={24} className="text-yellow-600" />
           </div>
           <h3 className="font-medium text-gray-900">Organize</h3>
           <p className="text-sm text-gray-600">Sort by categories and priority</p>
         </div>
         
         <div className="text-center">
-          <div className="w-12 h-12 bg-info/10 rounded-lg flex items-center justify-center mx-auto mb-2">
-            <ApperIcon name="TrendingUp" size={24} className="text-info" />
+<div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+<ApperIcon name="TrendingUp" size={24} className="text-blue-600" />
           </div>
           <h3 className="font-medium text-gray-900">Track Progress</h3>
           <p className="text-sm text-gray-600">Monitor your productivity</p>

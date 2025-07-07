@@ -26,7 +26,7 @@ const Loading = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-surface rounded-xl p-4 shadow-card"
+className="bg-white rounded-lg p-4 shadow-sm border border-gray-200"
           >
             <div className="flex items-start gap-3">
               <div className="w-5 h-5 bg-gray-200 rounded-full animate-pulse flex-shrink-0 mt-0.5"></div>
@@ -45,7 +45,7 @@ const Loading = () => {
 
       {/* Floating animation for visual interest */}
       <motion.div
-        className="fixed top-20 right-10 w-2 h-2 bg-primary rounded-full opacity-20"
+className="fixed top-20 right-10 w-2 h-2 bg-blue-600 rounded-full opacity-20"
         animate={{
           y: [0, -10, 0],
           scale: [1, 1.2, 1]

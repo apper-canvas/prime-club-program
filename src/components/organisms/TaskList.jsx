@@ -128,18 +128,18 @@ return (
       </div>
 
       {/* Categories Menu */}
-      <div className="bg-gradient-surface rounded-xl p-4 shadow-memphis border-4 border-memphis-green memphis-shape">
+<div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-sm font-black text-memphis-pink transform rotate-1">CATEGORIES:</span>
+<span className="text-sm font-medium text-gray-700">Categories</span>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `px-4 py-2 rounded-lg font-medium transition-all duration-200 hover-scale ${
+`px-4 py-2 rounded-lg font-medium transition-colors ${
                 isActive && !categoryId
-                  ? 'bg-gradient-primary text-white shadow-neon border-2 border-memphis-blue'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200 hover:border-memphis-yellow'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
               }`
             }
           >
@@ -150,10 +150,10 @@ return (
               key={category.Id}
               to={`/category/${category.Id}`}
               className={({ isActive }) =>
-                `px-4 py-2 rounded-lg font-medium transition-all duration-200 hover-scale ${
+`px-4 py-2 rounded-lg font-medium transition-colors ${
                   isActive && parseInt(categoryId) === category.Id
-                    ? 'bg-gradient-primary text-white shadow-neon border-2 border-memphis-blue'
-                    : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200 hover:border-memphis-yellow'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
                 }`
               }
             >
@@ -171,9 +171,9 @@ return (
         <QuickAddBar onTaskAdded={handleTaskAdded} categories={categories} />
       )}
 {/* Filters and Sort */}
-      <div className="flex items-center justify-between bg-gradient-surface rounded-xl p-4 shadow-memphis border-4 border-memphis-blue memphis-shape">
+<div className="flex items-center justify-between bg-white rounded-lg p-4 shadow-sm border border-gray-200">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-black text-memphis-pink mr-2 transform rotate-1">FILTER:</span>
+<span className="text-sm font-medium text-gray-700 mr-2">Filter:</span>
           <Button
             size="sm"
             variant={filter === 'all' ? 'default' : 'ghost'}
@@ -205,11 +205,11 @@ return (
         </div>
 
 <div className="flex items-center gap-2">
-          <span className="text-sm font-black text-memphis-blue mr-2 transform -rotate-1">SORT:</span>
+<span className="text-sm font-medium text-gray-700 mr-2">Sort:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="rounded-xl border-4 border-memphis-yellow bg-gradient-accent px-4 py-2 text-sm font-bold focus:outline-none focus:shadow-neon transform rotate-1"
+className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           >
             <option value="created">Created Date</option>
             <option value="dueDate">Due Date</option>

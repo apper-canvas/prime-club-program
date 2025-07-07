@@ -94,8 +94,8 @@ const TaskItem = ({ task, onUpdate, onDelete, categories }) => {
       initial={{ opacity: 0, y: 20 }}
 animate={{ opacity: 1, y: 0 }}
 exit={{ opacity: 0, y: -20 }}
-      className={`bg-gradient-surface rounded-xl p-4 shadow-card hover:shadow-hover transition-all duration-200 hover-lift border-2 border-gray-300 hover:border-memphis-pink transform hover:rotate-1 ${
-        task.completed ? 'opacity-75 grayscale' : ''
+className={`bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-colors border border-gray-200 hover:border-blue-300 ${
+        task.completed ? 'opacity-75' : ''
       }`}
     >
       <div className="flex items-start gap-3">
@@ -121,7 +121,7 @@ exit={{ opacity: 0, y: -20 }}
                 onChange={(e) => setEditDescription(e.target.value)}
                 placeholder="Task description"
                 rows={2}
-                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:border-transparent resize-none"
+className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:border-transparent resize-none"
               />
               <div className="flex items-center gap-2">
                 <Button size="sm" onClick={handleSave} disabled={isLoading}>
@@ -163,8 +163,8 @@ exit={{ opacity: 0, y: -20 }}
                   )}
                   
                   {task.dueDate && (
-                    <div className={`flex items-center gap-1 ${
-                      isOverdue ? 'text-error' : isDueToday ? 'text-accent' : 'text-gray-500'
+<div className={`flex items-center gap-1 ${
+                      isOverdue ? 'text-red-600' : isDueToday ? 'text-yellow-600' : 'text-gray-500'
                     }`}>
                       <ApperIcon name="Calendar" size={16} />
                       <span>
@@ -188,7 +188,7 @@ exit={{ opacity: 0, y: -20 }}
                     variant="ghost"
                     onClick={handleDelete}
                     disabled={isLoading}
-                    className="text-error hover:text-error hover:bg-error/10"
+className="text-red-600 hover:text-red-700 hover:bg-red-50"
                   >
                     <ApperIcon name="Trash2" size={14} />
                   </Button>
