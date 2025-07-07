@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 const ProgressIndicator = ({ completed, total }) => {
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0
   
-  return (
-    <div className="bg-surface rounded-xl p-4 shadow-card">
+return (
+    <div className="bg-gradient-neon rounded-xl p-4 shadow-memphis border-4 border-memphis-yellow transform hover:rotate-1 transition-all duration-200">
       <div className="flex items-center justify-between mb-2">
         <h3 className="font-medium text-gray-900">Today's Progress</h3>
         <span className="text-sm text-gray-500">
@@ -12,10 +12,10 @@ const ProgressIndicator = ({ completed, total }) => {
         </span>
       </div>
       
-      <div className="relative">
-        <div className="w-full bg-gray-200 rounded-full h-2">
+<div className="relative">
+        <div className="w-full bg-gradient-surface rounded-full h-4 border-2 border-memphis-blue">
           <motion.div
-            className="bg-gradient-to-r from-primary to-secondary h-2 rounded-full"
+            className="bg-gradient-primary h-4 rounded-full border-2 border-memphis-yellow shadow-neon"
             initial={{ width: 0 }}
             animate={{ width: `${percentage}%` }}
             transition={{ duration: 0.5, ease: "easeOut" }}

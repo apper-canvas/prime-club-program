@@ -8,15 +8,15 @@ const Button = forwardRef(({
   children, 
   ...props 
 }, ref) => {
-  const variants = {
-    default: 'bg-primary text-white hover:bg-primary/90 shadow-sm hover:shadow-md',
-    secondary: 'bg-secondary text-white hover:bg-secondary/90 shadow-sm hover:shadow-md',
-    accent: 'bg-accent text-white hover:bg-accent/90 shadow-sm hover:shadow-md',
-    outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white',
-    ghost: 'hover:bg-gray-100 text-gray-700 hover:text-gray-900',
-    success: 'bg-success text-white hover:bg-success/90 shadow-sm hover:shadow-md',
-    warning: 'bg-warning text-gray-900 hover:bg-warning/90 shadow-sm hover:shadow-md',
-    error: 'bg-error text-white hover:bg-error/90 shadow-sm hover:shadow-md'
+const variants = {
+    default: 'bg-gradient-primary text-white hover:bg-memphis-pink shadow-memphis hover:shadow-neon border-2 border-memphis-yellow',
+    secondary: 'bg-gradient-success text-black hover:bg-memphis-blue shadow-memphis hover:shadow-neon border-2 border-memphis-pink',
+    accent: 'bg-gradient-accent text-black hover:bg-memphis-green shadow-memphis hover:shadow-neon border-2 border-memphis-blue',
+    outline: 'border-4 border-memphis-pink text-memphis-pink hover:bg-memphis-pink hover:text-white shadow-memphis',
+    ghost: 'hover:bg-memphis-yellow text-memphis-blue hover:text-black border-2 border-transparent hover:border-memphis-blue',
+    success: 'bg-memphis-green text-black hover:bg-gradient-success shadow-memphis hover:shadow-neon border-2 border-memphis-blue',
+    warning: 'bg-memphis-yellow text-black hover:bg-gradient-accent shadow-memphis hover:shadow-neon border-2 border-memphis-pink',
+    error: 'bg-memphis-pink text-white hover:bg-gradient-primary shadow-memphis hover:shadow-neon border-2 border-memphis-yellow'
   }
 
   const sizes = {
@@ -26,9 +26,9 @@ const Button = forwardRef(({
   }
 
   return (
-    <button
+<button
       className={cn(
-        'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98]',
+        'inline-flex items-center justify-center rounded-xl font-black transition-all duration-200 focus:outline-none focus:shadow-neon disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.05] hover:rotate-1 active:scale-[0.95] active:rotate-0 transform',
         variants[variant],
         sizes[size],
         className

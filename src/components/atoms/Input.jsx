@@ -9,10 +9,10 @@ const Input = forwardRef(({
 }, ref) => {
   return (
     <input
-      type={type}
+type={type}
       className={cn(
-        'flex h-10 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200',
-        error && 'border-error focus:ring-error',
+        'flex h-12 w-full rounded-xl border-4 border-memphis-blue bg-gradient-surface px-4 py-2 text-sm font-bold placeholder:text-memphis-pink focus:outline-none focus:shadow-neon focus:border-memphis-pink disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200 transform focus:rotate-1',
+        error && 'border-memphis-pink focus:shadow-[0_0_20px_rgba(255,45,146,0.5)]',
         className
       )}
       ref={ref}

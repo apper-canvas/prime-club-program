@@ -8,17 +8,17 @@ const Badge = forwardRef(({
   children,
   ...props 
 }, ref) => {
-  const variants = {
-    default: 'bg-gray-100 text-gray-800',
-    primary: 'bg-primary/10 text-primary',
-    secondary: 'bg-secondary/10 text-secondary',
-    accent: 'bg-accent/10 text-accent',
-    success: 'bg-success/10 text-success',
-    warning: 'bg-warning/20 text-warning',
-    error: 'bg-error/10 text-error',
-    high: 'bg-accent/10 text-accent border border-accent/20',
-    medium: 'bg-warning/20 text-warning border border-warning/30',
-    low: 'bg-gray-100 text-gray-600 border border-gray-200'
+const variants = {
+    default: 'bg-gradient-surface text-gray-800 border-2 border-memphis-blue',
+    primary: 'bg-gradient-primary text-white border-2 border-memphis-yellow',
+    secondary: 'bg-gradient-success text-black border-2 border-memphis-pink',
+    accent: 'bg-gradient-accent text-black border-2 border-memphis-blue',
+    success: 'bg-memphis-green text-black border-2 border-memphis-blue',
+    warning: 'bg-memphis-yellow text-black border-2 border-memphis-pink',
+    error: 'bg-memphis-pink text-white border-2 border-memphis-yellow',
+    high: 'bg-memphis-pink text-white border-2 border-memphis-yellow shadow-neon',
+    medium: 'bg-memphis-yellow text-black border-2 border-memphis-blue',
+    low: 'bg-gradient-surface text-gray-600 border-2 border-memphis-green'
   }
 
   const sizes = {
@@ -28,9 +28,9 @@ const Badge = forwardRef(({
   }
 
   return (
-    <span
+<span
       className={cn(
-        'inline-flex items-center rounded-full font-medium transition-all duration-200 priority-pill',
+        'inline-flex items-center rounded-xl font-black transition-all duration-200 priority-pill transform hover:rotate-3 hover:scale-110',
         variants[variant],
         sizes[size],
         className

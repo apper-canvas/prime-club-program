@@ -5,11 +5,11 @@ import Badge from '@/components/atoms/Badge'
 const CategoryCard = ({ category, isActive, taskCount }) => {
   return (
     <NavLink
-      to={`/category/${category.Id}`}
-      className={`block p-3 rounded-lg border-l-4 transition-all duration-200 hover:bg-gray-50 hover-scale ${
+to={`/category/${category.Id}`}
+      className={`block p-4 rounded-xl border-4 transition-all duration-200 hover:bg-gradient-accent hover-scale transform hover:rotate-1 ${
         isActive 
-          ? 'bg-primary/5 border-l-primary shadow-sm' 
-          : 'border-l-gray-200 hover:border-l-gray-300'
+          ? 'bg-gradient-primary border-memphis-yellow shadow-memphis' 
+          : 'border-memphis-blue hover:border-memphis-pink bg-gradient-surface'
       }`}
     >
       <div className="flex items-center justify-between">

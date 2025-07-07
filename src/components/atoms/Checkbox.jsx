@@ -11,10 +11,10 @@ const Checkbox = forwardRef(({
     <div className="relative">
       <input
         type="checkbox"
-        className={cn(
-          'peer h-5 w-5 rounded-full border-2 border-gray-300 text-primary focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200 checkbox-custom appearance-none cursor-pointer',
-          'checked:bg-primary checked:border-primary',
-          'hover:border-primary/50 hover:scale-110',
+className={cn(
+          'peer h-6 w-6 rounded-xl border-4 border-memphis-blue text-memphis-pink focus:shadow-neon transition-all duration-200 checkbox-custom appearance-none cursor-pointer',
+          'checked:bg-memphis-pink checked:border-memphis-yellow',
+          'hover:border-memphis-pink hover:scale-110 hover:rotate-12',
           className
         )}
         checked={checked}

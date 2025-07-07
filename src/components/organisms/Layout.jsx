@@ -8,26 +8,26 @@ const Layout = ({ children }) => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
 
 return (
-    <div className="min-h-screen bg-gradient-background">
+    <div className="min-h-screen bg-gradient-memphis">
       {/* Header */}
-      <header className="bg-gradient-header border-b border-gray-200/50 px-4 py-3 lg:px-6 backdrop-blur-sm">
+      <header className="bg-gradient-neon border-b-4 border-memphis-pink px-4 py-3 lg:px-6 shadow-memphis">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileSidebarOpen(true)}
-              className="lg:hidden"
+              className="lg:hidden border-2 border-memphis-blue"
             >
               <ApperIcon name="Menu" size={20} />
             </Button>
             
-<div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center shadow-md">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-neon transform rotate-12 border-2 border-memphis-yellow">
                 <ApperIcon name="CheckSquare" size={20} className="text-white" />
               </div>
-              <h1 className="text-xl font-display font-bold text-gray-900">
-                TaskFlow
+              <h1 className="text-2xl font-display font-black text-memphis-pink transform -rotate-2 drop-shadow-lg">
+                TASKFLOW
               </h1>
             </div>
           </div>
@@ -63,11 +63,11 @@ return (
               <motion.div
                 initial={{ x: '-100%' }}
                 animate={{ x: 0 }}
-                exit={{ x: '-100%' }}
-transition={{ type: 'tween', duration: 0.3 }}
-                className="fixed left-0 top-0 bottom-0 w-64 bg-gradient-surface z-50 lg:hidden shadow-xl"
+exit={{ x: '-100%' }}
+                transition={{ type: 'tween', duration: 0.3 }}
+                className="fixed left-0 top-0 bottom-0 w-64 bg-gradient-neon z-50 lg:hidden shadow-memphis border-r-4 border-memphis-yellow"
               >
-                <div className="p-4 border-b border-gray-200">
+                <div className="p-4 border-b-4 border-memphis-pink">
                   <div className="flex items-center justify-between">
                     <h2 className="text-lg font-display font-semibold text-gray-900">
                       TaskFlow

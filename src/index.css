@@ -75,52 +75,98 @@ body {
 .confetti {
   animation: confetti 1s ease-out;
 }
-/* Gradient enhancements */
+/* Memphis design enhancements */
 .gradient-hover {
   transition: all 0.3s ease-out;
+  position: relative;
 }
 
 .gradient-hover:hover {
   background-size: 110% 110%;
+  transform: translateY(-2px) rotate(1deg);
 }
 
-/* Focus styles */
+.gradient-hover::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(45deg, #FF2D92, #00D4FF);
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gradient-hover:hover::before {
+  opacity: 0.3;
+}
+
+/* Memphis focus styles */
 input:focus, textarea:focus, select:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(91, 79, 233, 0.3);
+  box-shadow: 0 0 0 3px rgba(255, 45, 146, 0.4), 0 0 20px rgba(0, 212, 255, 0.3);
+  border-color: #FF2D92;
 }
 
-/* Enhanced gradient shadows */
+/* Memphis geometric shadows */
 .gradient-shadow {
-  box-shadow: 0 4px 20px rgba(91, 79, 233, 0.15);
+  box-shadow: 8px 8px 0px #FFE135, 16px 16px 0px #FF2D92;
 }
-/* Priority pill animations */
+
+/* Memphis scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, #FFE135, #FF2D92);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00D4FF, #32FF32);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FF2D92, #00D4FF);
+}
+
+/* Memphis priority pill animations */
 .priority-pill {
-  transition: all 0.15s ease-out;
+  transition: all 0.2s ease-out;
+  position: relative;
 }
 
 .priority-pill:hover {
-  transform: scale(1.02);
+  transform: scale(1.05) rotate(2deg);
+  animation: neon-pulse 1s ease-in-out;
 }
 
-/* Hover effects */
+/* Memphis hover effects */
 .hover-lift:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px) rotate(1deg);
+  box-shadow: 12px 12px 0px #FFE135, 24px 24px 0px #FF2D92;
 }
 
 .hover-scale:hover {
-  transform: scale(1.02);
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0 0 30px rgba(255, 45, 146, 0.4);
 }
 
-/* Checkbox animations */
+/* Memphis checkbox animations */
 .checkbox-custom {
   transition: all 0.2s ease-out;
+  border-width: 3px;
 }
 
 .checkbox-custom:checked {
-  background-color: #5B4FE9;
-  border-color: #5B4FE9;
+  background-color: #FF2D92;
+  border-color: #00D4FF;
+  box-shadow: 0 0 15px rgba(255, 45, 146, 0.5);
 }
 
 .checkbox-custom:checked::after {
@@ -131,4 +177,54 @@ input:focus, textarea:focus, select:focus {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* Memphis toast themes */
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #32FF32 0%, #00D4FF 100%);
+  color: black;
+  font-weight: bold;
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #FF2D92 0%, #FFE135 100%);
+  color: black;
+  font-weight: bold;
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #00D4FF 0%, #9D4EDD 100%);
+  color: white;
+  font-weight: bold;
+}
+
+.Toastify__toast--warning {
+  background: linear-gradient(135deg, #FFE135 0%, #FF6B35 100%);
+  color: black;
+  font-weight: bold;
+}
+
+/* Memphis geometric shapes */
+.memphis-shape::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #FFE135;
+  border-radius: 50%;
+  top: -10px;
+  right: -10px;
+  z-index: 1;
+}
+
+.memphis-shape::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #FF2D92;
+  transform: rotate(45deg);
+  bottom: -7px;
+  left: -7px;
+  z-index: 1;
 }

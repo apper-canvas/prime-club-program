@@ -135,10 +135,10 @@ case 'priority': {
         <QuickAddBar onTaskAdded={handleTaskAdded} categories={categories} />
       )}
 
-      {/* Filters and Sort */}
-      <div className="flex items-center justify-between bg-surface rounded-lg p-4 shadow-card">
+{/* Filters and Sort */}
+      <div className="flex items-center justify-between bg-gradient-surface rounded-xl p-4 shadow-memphis border-4 border-memphis-blue memphis-shape">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-gray-700 mr-2">Filter:</span>
+          <span className="text-sm font-black text-memphis-pink mr-2 transform rotate-1">FILTER:</span>
           <Button
             size="sm"
             variant={filter === 'all' ? 'default' : 'ghost'}
@@ -169,12 +169,12 @@ case 'priority': {
           </Button>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-gray-700 mr-2">Sort by:</span>
+<div className="flex items-center gap-2">
+          <span className="text-sm font-black text-memphis-blue mr-2 transform -rotate-1">SORT:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="rounded-xl border-4 border-memphis-yellow bg-gradient-accent px-4 py-2 text-sm font-bold focus:outline-none focus:shadow-neon transform rotate-1"
           >
             <option value="created">Created Date</option>
             <option value="dueDate">Due Date</option>
@@ -184,8 +184,8 @@ case 'priority': {
         </div>
       </div>
 
-      {/* Task List */}
-      <div className="space-y-3">
+{/* Task List */}
+      <div className="space-y-4">
         {sortedTasks.length === 0 ? (
           <Empty
             title={searchQuery ? 'No tasks found' : 'No tasks yet'}

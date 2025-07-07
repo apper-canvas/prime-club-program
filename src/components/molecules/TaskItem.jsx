@@ -93,9 +93,9 @@ const TaskItem = ({ task, onUpdate, onDelete, categories }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      className={`bg-surface rounded-xl p-4 shadow-card hover:shadow-hover transition-all duration-200 hover-lift ${
-        task.completed ? 'opacity-75' : ''
+exit={{ opacity: 0, y: -20 }}
+      className={`bg-gradient-surface rounded-xl p-4 shadow-memphis hover:shadow-neon transition-all duration-200 hover-lift border-4 border-memphis-blue hover:border-memphis-pink transform hover:rotate-1 ${
+        task.completed ? 'opacity-75 grayscale' : ''
       }`}
     >
       <div className="flex items-start gap-3">

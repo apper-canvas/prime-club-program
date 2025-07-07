@@ -37,8 +37,8 @@ const QuickAddBar = ({ onTaskAdded, categories }) => {
     }
   }
 
-  return (
-    <div className="bg-surface rounded-xl p-4 shadow-card border border-gray-100">
+return (
+    <div className="bg-gradient-neon rounded-xl p-4 shadow-memphis border-4 border-memphis-pink transform hover:rotate-1 transition-all duration-200">
       <form onSubmit={handleSubmit} className="flex items-center gap-3">
         <div className="flex-1">
           <Input
