@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation, NavLink } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import TaskItem from '@/components/molecules/TaskItem'
 import QuickAddBar from '@/components/molecules/QuickAddBar'
@@ -117,7 +117,7 @@ case 'priority': {
   if (loading) return <Loading />
   if (error) return <Error message={error} onRetry={loadData} />
 
-  return (
+return (
     <div className="flex-1 p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
@@ -127,6 +127,42 @@ case 'priority': {
         <ProgressIndicator completed={completedCount} total={totalCount} />
       </div>
 
+      {/* Categories Menu */}
+      <div className="bg-gradient-surface rounded-xl p-4 shadow-memphis border-4 border-memphis-green memphis-shape">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-sm font-black text-memphis-pink transform rotate-1">CATEGORIES:</span>
+        </div>
+        <div className="flex items-center gap-2 flex-wrap">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-lg font-medium transition-all duration-200 hover-scale ${
+                isActive && !categoryId
+                  ? 'bg-gradient-primary text-white shadow-neon border-2 border-memphis-blue'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200 hover:border-memphis-yellow'
+              }`
+            }
+          >
+            All Tasks
+          </NavLink>
+          {categories.map((category) => (
+            <NavLink
+              key={category.Id}
+              to={`/category/${category.Id}`}
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-lg font-medium transition-all duration-200 hover-scale ${
+                  isActive && parseInt(categoryId) === category.Id
+                    ? 'bg-gradient-primary text-white shadow-neon border-2 border-memphis-blue'
+                    : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200 hover:border-memphis-yellow'
+                }`
+              }
+            >
+              {category.name}
+            </NavLink>
+          ))}
+        </div>
+      </div>
+
       {/* Search Bar */}
       <SearchBar onSearch={handleSearch} />
 
@@ -134,7 +170,6 @@ case 'priority': {
       {!searchQuery && (
         <QuickAddBar onTaskAdded={handleTaskAdded} categories={categories} />
       )}
-
 {/* Filters and Sort */}
       <div className="flex items-center justify-between bg-gradient-surface rounded-xl p-4 shadow-memphis border-4 border-memphis-blue memphis-shape">
         <div className="flex items-center gap-2">
