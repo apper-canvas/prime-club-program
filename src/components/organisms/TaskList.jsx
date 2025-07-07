@@ -91,9 +91,10 @@ const TaskList = () => {
         if (!a.dueDate) return 1
         if (!b.dueDate) return -1
         return new Date(a.dueDate) - new Date(b.dueDate)
-      case 'priority':
+case 'priority': {
         const priorityOrder = { High: 3, Medium: 2, Low: 1 }
         return priorityOrder[b.priority] - priorityOrder[a.priority]
+      }
       case 'alphabetical':
         return a.title.localeCompare(b.title)
       default:
