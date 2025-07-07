@@ -8,10 +8,10 @@ import { taskService } from '@/services/api/taskService'
 const QuickAddBar = ({ onTaskAdded, categories }) => {
   const [title, setTitle] = useState('')
   const [dueDate, setDueDate] = useState('')
-  const [priority, setPriority] = useState('Medium')
+const [priority, setPriority] = useState('Medium')
   const [categoryId, setCategoryId] = useState(categories[0]?.Id || 1)
   const [isLoading, setIsLoading] = useState(false)
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
