@@ -49,8 +49,8 @@ const QuickAddBar = ({ onTaskAdded, categories }) => {
     setIsExpanded(!isExpanded)
   }
 
-  return (
-    <div className="bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-xl p-4 shadow-lg border-4 border-white transform hover:rotate-1 transition-all duration-200">
+return (
+    <div className="bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-xl p-4 shadow-lg border-4 border-white">
       <form onSubmit={handleSubmit} className="space-y-3">
         {/* Title Row */}
         <div className="flex items-center gap-3">
