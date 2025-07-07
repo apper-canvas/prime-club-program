@@ -7,10 +7,10 @@ import CategorySidebar from '@/components/organisms/CategorySidebar'
 const Layout = ({ children }) => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
 
-  return (
-    <div className="min-h-screen bg-background">
+return (
+    <div className="min-h-screen bg-gradient-background">
       {/* Header */}
-      <header className="bg-surface border-b border-gray-200 px-4 py-3 lg:px-6">
+      <header className="bg-gradient-header border-b border-gray-200/50 px-4 py-3 lg:px-6 backdrop-blur-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Button
@@ -22,8 +22,8 @@ const Layout = ({ children }) => {
               <ApperIcon name="Menu" size={20} />
             </Button>
             
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
+<div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center shadow-md">
                 <ApperIcon name="CheckSquare" size={20} className="text-white" />
               </div>
               <h1 className="text-xl font-display font-bold text-gray-900">
@@ -64,8 +64,8 @@ const Layout = ({ children }) => {
                 initial={{ x: '-100%' }}
                 animate={{ x: 0 }}
                 exit={{ x: '-100%' }}
-                transition={{ type: 'tween', duration: 0.3 }}
-                className="fixed left-0 top-0 bottom-0 w-64 bg-surface z-50 lg:hidden"
+transition={{ type: 'tween', duration: 0.3 }}
+                className="fixed left-0 top-0 bottom-0 w-64 bg-gradient-surface z-50 lg:hidden shadow-xl"
               >
                 <div className="p-4 border-b border-gray-200">
                   <div className="flex items-center justify-between">

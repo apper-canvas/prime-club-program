@@ -75,6 +75,14 @@ body {
 .confetti {
   animation: confetti 1s ease-out;
 }
+/* Gradient enhancements */
+.gradient-hover {
+  transition: all 0.3s ease-out;
+}
+
+.gradient-hover:hover {
+  background-size: 110% 110%;
+}
 
 /* Focus styles */
 input:focus, textarea:focus, select:focus {
@@ -82,6 +90,10 @@ input:focus, textarea:focus, select:focus {
   box-shadow: 0 0 0 2px rgba(91, 79, 233, 0.3);
 }
 
+/* Enhanced gradient shadows */
+.gradient-shadow {
+  box-shadow: 0 4px 20px rgba(91, 79, 233, 0.15);
+}
 /* Priority pill animations */
 .priority-pill {
   transition: all 0.15s ease-out;

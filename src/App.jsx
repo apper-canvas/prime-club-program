@@ -5,7 +5,7 @@ import Layout from '@/components/organisms/Layout'
 
 function App() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-background">
       <Layout>
         <Routes>
           <Route path="/" element={<TasksPage />} />
