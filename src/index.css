@@ -2,45 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'react-toastify/dist/ReactToastify.css';
-
-/* Custom toast styling */
-.Toastify__toast {
-  @apply font-body text-sm rounded-lg shadow-lg;
-}
-
-.Toastify__toast--success {
-  @apply bg-success text-white;
-}
-
-.Toastify__toast--error {
-  @apply bg-error text-white;
-}
-
-.Toastify__toast--info {
-  @apply bg-info text-white;
-}
-
-.Toastify__toast--warning {
-  @apply bg-warning text-gray-900;
-}
-
-.Toastify__toast-container {
-  @apply w-80;
-}
-
-/* Base styles */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -48,7 +9,6 @@ body {
 
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -60,79 +20,265 @@ body {
   background: #a1a1a1;
 }
 
-/* Task completion animation */
-.task-complete {
-  animation: bounce-subtle 0.3s ease-out;
+/* Toast styling */
+.Toastify__toast-container {
+  z-index: 9999;
 }
 
-/* Progress ring animation */
-.progress-ring {
-  transform-origin: center;
-  animation: progress 0.5s ease-out;
+.Toastify__toast {
+  border-radius: 8px;
+  padding: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-/* Confetti animation */
-.confetti {
-  animation: confetti 1s ease-out;
-}
-/* Scandinavian design focus styles */
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
-  border-color: #3B82F6;
-}
-
-/* Clean hover effects */
-.hover-lift:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.hover-scale:hover {
-  transform: scale(1.02);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Clean toast themes */
 .Toastify__toast--success {
-  background: #22C55E;
-  color: white;
-  font-weight: 500;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
 }
 
 .Toastify__toast--error {
-  background: #EF4444;
-  color: white;
-  font-weight: 500;
-}
-
-.Toastify__toast--info {
-  background: #3B82F6;
-  color: white;
-  font-weight: 500;
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
 }
 
 .Toastify__toast--warning {
-  background: #F59E0B;
-  color: white;
-  font-weight: 500;
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
 }
 
-/* Scandinavian scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
 }
 
-::-webkit-scrollbar-track {
-  background: #F9FAFB;
-  border-radius: 3px;
+/* Custom animations */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: #D1D5DB;
-  border-radius: 3px;
+.shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+  background: linear-gradient(to right, #f6f7f8 8%, #edeef1 18%, #f6f7f8 33%);
+  background-size: 800px 104px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #9CA3AF;
+/* Drag and drop styles */
+.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg);
+}
+
+.drag-over {
+  background-color: #f0f8ff;
+  border: 2px dashed #7C3AED;
+}
+
+/* Empty row styles */
+.empty-row {
+  background-color: white;
+}
+
+.empty-row:hover {
+  background-color: #f5f5f5;
+}
+
+.empty-row input::-moz-placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.empty-row input::placeholder,
+.empty-row select {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.empty-row .opacity-60 {
+  opacity: 0.6;
+}
+
+/* Top scrollbar styles */
+.top-scrollbar {
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+.top-scrollbar-content {
+  pointer-events: none;
+}
+
+/* Viewport stability and canvas error prevention */
+html, body {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+#root {
+  min-height: 100vh;
+  min-width: 100%;
+}
+
+/* Ensure no elements have zero dimensions that could cause canvas errors */
+* {
+  min-height: 0;
+}
+
+*:not(script):not(style):not(meta):not(title):not(link) {
+  min-width: 0;
+}
+
+/* Prevent canvas rendering issues */
+canvas {
+  min-width: 1px;
+  min-height: 1px;
+}
+
+/* Ensure viewport capture targets are properly sized */
+.viewport-capture-ready {
+  min-width: 1px;
+  min-height: 1px;
+  visibility: visible;
+}
+
+/* Loading state protection */
+.loading-viewport {
+  min-width: 100px;
+  min-height: 100px;
+  background-color: transparent;
+}
+
+/* Image loading optimization and error handling */
+img {
+  max-width: 100%;
+  height: auto;
+  /* Prevent layout shifts during loading */
+  min-width: 1px;
+  min-height: 1px;
+}
+
+/* Lazy loading hint for better performance */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Image error states */
+img[src=""], img:not([src]) {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect width="100" height="100" fill="%23f0f0f0"/%3E%3Ctext x="50" y="50" text-anchor="middle" dy="0.35em" font-family="Arial" font-size="12" fill="%23666"%3ENo Image%3C/text%3E%3C/svg%3E');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Prevent image dragging to avoid viewport capture issues */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+/* Loading placeholder for images */
+.image-loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading-shimmer 2s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Ensure images are ready for viewport capture */
+.image-ready {
+  opacity: 1;
+  visibility: visible;
+  min-width: 1px;
+  min-height: 1px;
+}
+
+/* Fallback for broken images */
+img::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+/* Avatar and profile image specific handling */
+.avatar-image, .profile-image {
+  object-fit: cover;
+  background-color: #f8f9fa;
+  position: relative;
+}
+
+/* Avatar loading states */
+.avatar-image.image-loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+}
+
+.avatar-image.image-ready {
+  background: none;
+}
+
+/* Avatar error fallback */
+.avatar-image img[src=""], 
+.avatar-image img:not([src]) {
+  display: none;
+}
+
+/* Smooth loading transitions for avatars */
+.avatar-image img {
+  transition: opacity 0.3s ease;
+}
+
+.avatar-image img.loaded {
+  opacity: 1;
+}
+
+/* Avatar loading spinner */
+.avatar-image .animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Prevent avatar images from causing layout shifts */
+.avatar-image {
+  overflow: hidden;
+}
+
+.avatar-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-width: 1px;
+  min-height: 1px;
 }

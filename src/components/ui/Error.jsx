@@ -1,45 +1,47 @@
-import { motion } from 'framer-motion'
-import ApperIcon from '@/components/ApperIcon'
-import Button from '@/components/atoms/Button'
+import { motion } from "framer-motion";
+import Card from "@/components/atoms/Card";
+import Button from "@/components/atoms/Button";
+import ApperIcon from "@/components/ApperIcon";
 
-const Error = ({ message = 'Something went wrong', onRetry }) => {
+const Error = ({ message = "Something went wrong", onRetry }) => {
   return (
-    <div className="flex-1 flex items-center justify-center p-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center max-w-md mx-auto"
-      >
-<div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
-          <ApperIcon name="AlertTriangle" size={32} className="text-white" />
-        </div>
-        
-        <h2 className="text-2xl font-display font-bold text-gray-900 mb-2">
-          Oops! Something went wrong
-        </h2>
-        
-        <p className="text-gray-600 mb-6">
-          {message}
-        </p>
-        
-        <div className="flex items-center justify-center gap-3">
-          <Button onClick={onRetry} variant="default">
-            <ApperIcon name="RefreshCw" size={16} className="mr-2" />
-            Try Again
-          </Button>
-          
-          <Button onClick={() => window.location.reload()} variant="ghost">
-            <ApperIcon name="RotateCcw" size={16} className="mr-2" />
-            Refresh Page
-          </Button>
-        </div>
-        
-        <div className="mt-8 text-sm text-gray-500">
-          <p>If the problem persists, please check your internet connection.</p>
-        </div>
-      </motion.div>
-    </div>
-  )
-}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex items-center justify-center min-h-[300px]"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl w-full">
+        {/* Main Error Information Tile */}
+        <Card className="p-6 text-center">
+          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <ApperIcon name="HelpCircle" size={32} className="text-blue-600" />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">We're here to help!</h3>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            {message || "Don't worry, this happens sometimes. We're working to get things back on track."}
+          </p>
+        </Card>
 
-export default Error
+        {/* Action Tile */}
+        <Card className="p-6 text-center">
+          <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <ApperIcon name="RefreshCw" size={32} className="text-primary-600" />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Quick Fix</h3>
+          <p className="text-gray-600 text-sm mb-4">
+            Try refreshing to get back to where you were.
+          </p>
+          {onRetry && (
+            <Button onClick={onRetry} className="w-full">
+              <ApperIcon name="RefreshCw" size={16} className="mr-2" />
+              Refresh & Continue
+            </Button>
+          )}
+        </Card>
+      </div>
+    </motion.div>
+  );
+};
+
+export default Error;

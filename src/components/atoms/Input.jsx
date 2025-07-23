@@ -1,27 +1,69 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { cn } from "@/utils/cn";
 
 const Input = forwardRef(({ 
   className, 
-  type = 'text', 
-  error,
+  type, 
+  value: controlledValue, 
+  onChange,
+  detectUrlPrefix = false,
+  urlPrefix = "https://",
   ...props 
 }, ref) => {
-return (
+  const [internalValue, setInternalValue] = useState(controlledValue || "");
+
+  // Sync internal value with controlled value
+  useEffect(() => {
+    setInternalValue(controlledValue || "");
+  }, [controlledValue]);
+
+  const handleChange = (e) => {
+    let newValue = e.target.value;
+    
+    // Apply URL prefix logic if enabled
+    if (detectUrlPrefix && type === "url") {
+      // Check if user is typing and doesn't have a protocol
+      if (newValue && !newValue.match(/^https?:\/\//)) {
+        // If the value doesn't start with the prefix, add it
+        if (!newValue.startsWith(urlPrefix)) {
+          newValue = urlPrefix + newValue;
+        }
+      }
+    }
+    
+    setInternalValue(newValue);
+    
+    // Call the original onChange with the processed value
+    if (onChange) {
+      const syntheticEvent = {
+        ...e,
+        target: {
+          ...e.target,
+          value: newValue
+        }
+      };
+      onChange(syntheticEvent);
+    }
+  };
+
+  const displayValue = controlledValue !== undefined ? controlledValue : internalValue;
+
+  return (
     <input
       type={type}
       className={cn(
-        'flex h-12 w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50 transition-colors',
-        error && 'border-red-500 focus:border-red-500 focus:ring-red-500',
-        error && 'border-memphis-pink focus:shadow-[0_0_20px_rgba(255,45,146,0.5)]',
+        "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       ref={ref}
+      value={displayValue}
+      onChange={handleChange}
       {...props}
     />
   )
 })
 
-Input.displayName = 'Input'
+Input.displayName = "Input"
 
+export { Input }
 export default Input
