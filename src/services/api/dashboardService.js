@@ -1,7 +1,12 @@
 // Dashboard Service - Centralized data management for dashboard components
-import salesRepsData from "@/services/mockData/salesReps.json";
-import dashboardData from "@/services/mockData/dashboard.json";
-
+// Initialize ApperClient for dashboard operations
+const getApperClient = () => {
+  const { ApperClient } = window.ApperSDK;
+  return new ApperClient({
+    apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+    apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+  });
+};
 // Standardized API delay for consistent UX
 const API_DELAY = 300;
 
@@ -73,50 +78,195 @@ const validateUserId = (userId) => {
 export const getDashboardMetrics = async () => {
   await simulateAPICall();
   
-  if (!dashboardData?.metrics || !Array.isArray(dashboardData.metrics)) {
-    throw new Error('Invalid dashboard metrics data structure');
+  try {
+    const apperClient = getApperClient();
+    
+    // Get total leads contacted
+    const leadsResponse = await apperClient.fetchRecords("lead_c", {
+      fields: [{ field: { Name: "Id" } }]
+    });
+    
+    // Get total meetings from deals
+    const meetingsResponse = await apperClient.fetchRecords("deal_c", {
+      fields: [{ field: { Name: "Id" } }],
+      where: [{ FieldName: "stage_c", Operator: "Contains", Values: ["Meeting"] }]
+    });
+    
+    // Get closed deals
+    const closedDealsResponse = await apperClient.fetchRecords("deal_c", {
+      fields: [{ field: { Name: "Id" } }],
+      where: [{ FieldName: "stage_c", Operator: "EqualTo", Values: ["Closed"] }]
+    });
+    
+    const totalLeads = leadsResponse.success ? leadsResponse.data.length : 0;
+    const totalMeetings = meetingsResponse.success ? meetingsResponse.data.length : 0;
+    const totalDeals = closedDealsResponse.success ? closedDealsResponse.data.length : 0;
+    const conversionRate = totalLeads > 0 ? ((totalDeals / totalLeads) * 100).toFixed(1) : 0;
+    
+    return [
+      {
+        id: 1,
+        title: "Total Leads Contacted",
+        value: totalLeads.toString(),
+        icon: "Users",
+        trend: "up",
+        trendValue: "12%",
+        color: "primary"
+      },
+      {
+        id: 2,
+        title: "Meetings Booked",
+        value: totalMeetings.toString(),
+        icon: "Calendar",
+        trend: "up",
+        trendValue: "8%",
+        color: "success"
+      },
+      {
+        id: 3,
+        title: "Deals Closed",
+        value: totalDeals.toString(),
+        icon: "TrendingUp",
+        trend: "up",
+        trendValue: "15%",
+        color: "warning"
+      },
+      {
+        id: 4,
+        title: "Conversion Rate",
+        value: `${conversionRate}%`,
+        icon: "Target",
+        trend: "up",
+        trendValue: "2%",
+        color: "info"
+      }
+    ];
+  } catch (error) {
+    console.error("Error fetching dashboard metrics:", error?.response?.data?.message || error.message);
+    // Return fallback metrics
+    return [
+      { id: 1, title: "Total Leads Contacted", value: "0", icon: "Users", trend: "neutral", trendValue: "0%", color: "primary" },
+      { id: 2, title: "Meetings Booked", value: "0", icon: "Calendar", trend: "neutral", trendValue: "0%", color: "success" },
+      { id: 3, title: "Deals Closed", value: "0", icon: "TrendingUp", trend: "neutral", trendValue: "0%", color: "warning" },
+      { id: 4, title: "Conversion Rate", value: "0%", icon: "Target", trend: "neutral", trendValue: "0%", color: "info" }
+    ];
   }
-  
-  return dashboardData.metrics.map(metric => ({
-    ...metric,
-    id: metric.id || Math.random(),
-    value: metric.value || '0',
-    trend: metric.trend || 'neutral',
-    trendValue: metric.trendValue || '0%'
-  }));
 };
 
-// Recent activity from static data
+// Recent activity from leads and deals
 export const getRecentActivity = async () => {
   await simulateAPICall();
   
-  if (!dashboardData?.recentActivity || !Array.isArray(dashboardData.recentActivity)) {
-    throw new Error('Invalid recent activity data structure');
+  try {
+    const apperClient = getApperClient();
+    
+    // Get recent leads
+    const leadsResponse = await apperClient.fetchRecords("lead_c", {
+      fields: [
+        { field: { Name: "Name" } },
+        { field: { Name: "website_url_c" } },
+        { field: { Name: "created_at_c" } }
+      ],
+      orderBy: [{ fieldName: "created_at_c", sorttype: "DESC" }],
+      pagingInfo: { limit: 5, offset: 0 }
+    });
+    
+    // Get recent deals
+    const dealsResponse = await apperClient.fetchRecords("deal_c", {
+      fields: [
+        { field: { Name: "Name" } },
+        { field: { Name: "value_c" } },
+        { field: { Name: "stage_c" } },
+        { field: { Name: "created_at_c" } }
+      ],
+      orderBy: [{ fieldName: "created_at_c", sorttype: "DESC" }],
+      pagingInfo: { limit: 5, offset: 0 }
+    });
+    
+    const activities = [];
+    
+    if (leadsResponse.success) {
+      leadsResponse.data.forEach(lead => {
+        activities.push({
+          id: `lead-${lead.Id}`,
+          title: `New lead: ${lead.website_url_c || lead.Name}`,
+          type: "contact",
+          time: lead.created_at_c ? new Date(lead.created_at_c).toLocaleTimeString('en-US', { 
+            hour: '2-digit', minute: '2-digit', hour12: true 
+          }) : 'Unknown time'
+        });
+      });
+    }
+    
+    if (dealsResponse.success) {
+      dealsResponse.data.forEach(deal => {
+        activities.push({
+          id: `deal-${deal.Id}`,
+          title: `Deal ${deal.stage_c}: ${deal.Name} - $${deal.value_c || 0}`,
+          type: deal.stage_c === 'Closed' ? "deal" : "meeting",
+          time: deal.created_at_c ? new Date(deal.created_at_c).toLocaleTimeString('en-US', { 
+            hour: '2-digit', minute: '2-digit', hour12: true 
+          }) : 'Unknown time'
+        });
+      });
+    }
+    
+    return activities
+      .sort((a, b) => {
+        // Sort by time, newest first
+        const timeA = new Date(a.time).getTime();
+        const timeB = new Date(b.time).getTime();
+        return timeB - timeA;
+      })
+      .slice(0, 10);
+      
+  } catch (error) {
+    console.error("Error fetching recent activity:", error?.response?.data?.message || error.message);
+    return [
+      { id: 1, title: "No recent activity", type: "general", time: "N/A" }
+    ];
   }
-  
-  return dashboardData.recentActivity.map(activity => ({
-    ...activity,
-    id: activity.id || Math.random(),
-    time: activity.time || 'Unknown time',
-    type: activity.type || 'general'
-  }));
 };
 
-// Today's meetings from static data
+// Today's meetings from deals
 export const getTodaysMeetings = async () => {
   await simulateAPICall();
   
-  if (!dashboardData?.todaysMeetings || !Array.isArray(dashboardData.todaysMeetings)) {
+  try {
+    const apperClient = getApperClient();
+    
+    const response = await apperClient.fetchRecords("deal_c", {
+      fields: [
+        { field: { Name: "Name" } },
+        { field: { Name: "lead_name_c" } },
+        { field: { Name: "stage_c" } },
+        { field: { Name: "created_at_c" } }
+      ],
+      where: [
+        { FieldName: "stage_c", Operator: "Contains", Values: ["Meeting"] },
+        { FieldName: "created_at_c", Operator: "RelativeMatch", Values: ["Today"] }
+      ]
+    });
+    
+    if (!response.success) {
+      return [];
+    }
+    
+    return response.data.map(deal => ({
+      id: deal.Id,
+      title: `${deal.stage_c} - ${deal.lead_name_c || deal.Name}`,
+      time: new Date(deal.created_at_c).toLocaleTimeString('en-US', { 
+        hour: '2-digit', minute: '2-digit', hour12: true 
+      }),
+      duration: "30 min",
+      type: deal.stage_c.toLowerCase().includes('booked') ? 'demo' : 'followup',
+      client: deal.lead_name_c || deal.Name
+    }));
+    
+  } catch (error) {
+    console.error("Error fetching today's meetings:", error?.response?.data?.message || error.message);
     return [];
   }
-  
-  return dashboardData.todaysMeetings.map(meeting => ({
-    ...meeting,
-    id: meeting.id || Math.random(),
-    title: meeting.title || 'Untitled Meeting',
-    time: meeting.time || 'TBD',
-    client: meeting.client || meeting.title || 'Unknown Client'
-  }));
 };
 
 // Pending follow-ups from leads service
@@ -135,9 +285,9 @@ export const getPendingFollowUps = async () => {
     return followUps.map(followUp => ({
       ...followUp,
       Id: followUp.Id || Math.random(),
-      websiteUrl: followUp.websiteUrl || 'Unknown URL',
-      category: followUp.category || 'General',
-      followUpDate: followUp.followUpDate || new Date().toISOString()
+      websiteUrl: followUp.website_url_c || followUp.websiteUrl || 'Unknown URL',
+      category: followUp.category_c || followUp.category || 'General',
+      followUpDate: followUp.follow_up_date_c || followUp.followUpDate || new Date().toISOString()
     }));
   }, fallback);
 };
@@ -220,13 +370,10 @@ export const getSalesFunnelAnalysis = async () => {
 export const getTeamPerformanceRankings = async () => {
   await simulateAPICall();
   
-  const fallback = salesRepsData.map(rep => ({
-    Id: rep.Id,
-    name: rep.name,
-    totalLeads: Math.floor(Math.random() * 100) + 10,
-    weekLeads: Math.floor(Math.random() * 20) + 1,
-    todayLeads: Math.floor(Math.random() * 5)
-  }));
+  const fallback = [
+    { Id: 1, name: 'Demo User 1', totalLeads: 25, weekLeads: 5, todayLeads: 2 },
+    { Id: 2, name: 'Demo User 2', totalLeads: 18, weekLeads: 3, todayLeads: 1 }
+  ];
   
   return safeServiceCall(async () => {
     const { getUserPerformance } = await import("@/services/api/analyticsService");
@@ -258,36 +405,37 @@ export const getRevenueTrendsData = async (year = new Date().getFullYear()) => {
   };
   
   return safeServiceCall(async () => {
-    const { getWebsiteUrlActivity } = await import("@/services/api/reportService");
-    const urlActivity = await getWebsiteUrlActivity();
+    const apperClient = getApperClient();
     
-    if (!urlActivity?.data || !Array.isArray(urlActivity.data)) {
+    // Get deals data for revenue calculation
+    const response = await apperClient.fetchRecords("deal_c", {
+      fields: [
+        { field: { Name: "value_c" } },
+        { field: { Name: "created_at_c" } }
+      ],
+      where: [
+        { FieldName: "created_at_c", Operator: "ExactMatch", SubOperator: "Year", Values: [year.toString()] }
+      ]
+    });
+    
+    if (!response.success) {
       return fallback;
     }
     
-const leads = urlActivity.data;
-    
-    // Filter leads by selected year and group by month
-    const yearLeads = leads.filter(lead => {
-      if (!lead.createdAt) return false;
-      const leadYear = new Date(lead.createdAt).getFullYear();
-      return leadYear === year;
-    });
-    
-    // Group leads by month and calculate monthly revenue
-    const monthlyData = yearLeads.reduce((acc, lead) => {
-      if (!lead.createdAt) return acc;
+    // Group deals by month and calculate monthly revenue
+    const monthlyData = response.data.reduce((acc, deal) => {
+      if (!deal.created_at_c) return acc;
       
-      const month = new Date(lead.createdAt).toISOString().slice(0, 7);
+      const month = new Date(deal.created_at_c).toISOString().slice(0, 7);
       if (!acc[month]) {
         acc[month] = { count: 0, revenue: 0 };
       }
       acc[month].count += 1;
-      acc[month].revenue += lead.revenue || lead.arr || 0;
+      acc[month].revenue += deal.value_c || 0;
       return acc;
     }, {});
     
-// Generate all months for the selected year
+    // Generate all months for the selected year
     const allMonths = Array.from({ length: 12 }, (_, i) => {
       const month = String(i + 1).padStart(2, '0');
       return `${year}-${month}`;
@@ -298,7 +446,7 @@ const leads = urlActivity.data;
       return monthlyData[month] ? monthlyData[month].revenue : 0;
     });
     
-return {
+    return {
       categories: allMonths.map(month => {
         const date = new Date(month);
         return date.toLocaleDateString('en-US', { month: 'short' });
@@ -312,34 +460,40 @@ return {
 export const getDetailedRecentActivity = async () => {
   await simulateAPICall();
   
-  const fallback = dashboardData.recentActivity || [];
+  const fallback = [
+    { id: 1, title: "No recent activity", type: "general", time: "N/A" }
+  ];
   
   return safeServiceCall(async () => {
-    const { getWebsiteUrlActivity } = await import("@/services/api/reportService");
-    const urlActivity = await getWebsiteUrlActivity();
+    const apperClient = getApperClient();
     
-    if (!urlActivity?.data || !Array.isArray(urlActivity.data)) {
+    // Get recent leads
+    const leadsResponse = await apperClient.fetchRecords("lead_c", {
+      fields: [
+        { field: { Name: "website_url_c" } },
+        { field: { Name: "created_at_c" } }
+      ],
+      orderBy: [{ fieldName: "created_at_c", sorttype: "DESC" }],
+      pagingInfo: { limit: 10, offset: 0 }
+    });
+    
+    if (!leadsResponse.success || !leadsResponse.data) {
       return fallback;
     }
     
-    const recentLeads = urlActivity.data.slice(0, 10);
-    
-    const detailedActivity = recentLeads.map(lead => ({
+    const detailedActivity = leadsResponse.data.map(lead => ({
       id: lead.Id || Math.random(),
-      title: `New lead added: ${(lead.websiteUrl || 'Unknown URL').replace(/^https?:\/\//, '').replace(/\/$/, '')}`,
+      title: `New lead added: ${(lead.website_url_c || 'Unknown URL').replace(/^https?:\/\//, '').replace(/\/$/, '')}`,
       type: "contact",
-      time: lead.createdAt ? new Date(lead.createdAt).toLocaleTimeString('en-US', { 
+      time: lead.created_at_c ? new Date(lead.created_at_c).toLocaleTimeString('en-US', { 
         hour: '2-digit', 
         minute: '2-digit',
         hour12: true 
       }) : 'Unknown time',
-      date: lead.createdAt ? new Date(lead.createdAt).toLocaleDateString() : new Date().toLocaleDateString()
+      date: lead.created_at_c ? new Date(lead.created_at_c).toLocaleDateString() : new Date().toLocaleDateString()
     }));
     
-    // Combine with dashboard activity
-    const combinedActivity = [...detailedActivity, ...fallback];
-    
-    return combinedActivity
+    return detailedActivity
       .sort((a, b) => {
         const dateA = new Date(a.date || Date.now());
         const dateB = new Date(b.date || Date.now());
@@ -373,7 +527,7 @@ export const getUserLeadsReport = async (userId, period = 'today') => {
     
     // Filter leads by user
     const userLeads = allLeads.filter(lead => 
-      lead.addedBy === validUserId
+      lead.added_by_c === validUserId || lead.addedBy === validUserId
     );
     
     // Get date range for filtering
@@ -381,9 +535,10 @@ export const getUserLeadsReport = async (userId, period = 'today') => {
     
     // Filter leads by date range
     const filteredLeads = userLeads.filter(lead => {
-      if (!lead.createdAt) return false;
+      const createdAt = lead.created_at_c || lead.createdAt;
+      if (!createdAt) return false;
       
-      const leadDate = new Date(lead.createdAt);
+      const leadDate = new Date(createdAt);
       return leadDate >= startDate && leadDate < endDate;
     });
     
@@ -392,9 +547,9 @@ export const getUserLeadsReport = async (userId, period = 'today') => {
       .map(lead => ({
         ...lead,
         Id: lead.Id || Math.random(),
-        websiteUrl: lead.websiteUrl || 'Unknown URL',
-        category: lead.category || 'General',
-        createdAt: lead.createdAt || new Date().toISOString()
+        websiteUrl: lead.website_url_c || lead.websiteUrl || 'Unknown URL',
+        category: lead.category_c || lead.category || 'General',
+        createdAt: lead.created_at_c || lead.createdAt || new Date().toISOString()
       }))
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   }, fallback);

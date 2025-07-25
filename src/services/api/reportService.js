@@ -1,6 +1,13 @@
-import leadsData from "@/services/mockData/leads.json";
-import salesRepsData from "@/services/mockData/salesReps.json";
-import { getFreshLeadsOnly } from "./leadsService";
+// Initialize ApperClient for report operations
+const getApperClient = () => {
+  const { ApperClient } = window.ApperSDK;
+  return new ApperClient({
+    apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+    apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+  });
+};
+
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Utility function to clean website URLs by removing trailing slash
 const cleanWebsiteUrl = (url) => {
@@ -10,65 +17,115 @@ const cleanWebsiteUrl = (url) => {
 
 // Get website URL activity with filtering options
 export const getWebsiteUrlActivity = async (filters = {}) => {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 300));
-  let filteredData = [...leadsData];
+  await delay(300);
   
-  // Filter by date range
-  if (filters.startDate || filters.endDate) {
-    filteredData = filteredData.filter(lead => {
-      const leadDate = new Date(lead.createdAt);
-      const start = filters.startDate ? new Date(filters.startDate) : new Date('1900-01-01');
-      const end = filters.endDate ? new Date(filters.endDate) : new Date('2100-12-31');
-      
-      // Set time to compare only dates
-      leadDate.setHours(0, 0, 0, 0);
-      start.setHours(0, 0, 0, 0);
-      end.setHours(23, 59, 59, 999);
-      
-      return leadDate >= start && leadDate <= end;
-    });
-  }
-  
-  // Filter by specific date (for today, yesterday, etc.)
-  if (filters.date) {
-    const targetDate = new Date(filters.date);
-    filteredData = filteredData.filter(lead => {
-      const leadDate = new Date(lead.createdAt);
-      return leadDate.toDateString() === targetDate.toDateString();
-    });
-  }
-  
-  // Filter by user/sales rep
-  if (filters.addedBy) {
-    filteredData = filteredData.filter(lead => lead.addedBy === filters.addedBy);
-  }
-  
-  // Filter by search term
-  if (filters.searchTerm) {
-    const term = filters.searchTerm.toLowerCase();
-    filteredData = filteredData.filter(lead => 
-      lead.websiteUrl.toLowerCase().includes(term) ||
-      lead.category.toLowerCase().includes(term) ||
-      lead.addedByName.toLowerCase().includes(term)
-    );
-}
-  
-  // Clean website URLs in the filtered data
-  const cleanedData = filteredData.map(lead => ({
-    ...lead,
-    websiteUrl: cleanWebsiteUrl(lead.websiteUrl)
-  }));
-  
-  return {
-    data: cleanedData,
-    summary: {
-      totalUrls: filteredData.length,
-      totalArr: filteredData.reduce((sum, lead) => sum + lead.arr, 0),
-      byStatus: getStatusSummary(filteredData),
-      byCategory: getCategorySummary(filteredData)
+  try {
+    const apperClient = getApperClient();
+    
+    const whereConditions = [];
+    
+    // Filter by date range
+    if (filters.startDate || filters.endDate) {
+      if (filters.startDate) {
+        whereConditions.push({
+          FieldName: "created_at_c",
+          Operator: "GreaterThanOrEqualTo",
+          Values: [filters.startDate]
+        });
+      }
+      if (filters.endDate) {
+        whereConditions.push({
+          FieldName: "created_at_c",
+          Operator: "LessThanOrEqualTo",
+          Values: [filters.endDate]
+        });
+      }
     }
-  };
+    
+    // Filter by specific date
+    if (filters.date) {
+      whereConditions.push({
+        FieldName: "created_at_c",
+        Operator: "ExactMatch",
+        SubOperator: "Day",
+        Values: [new Date(filters.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })]
+      });
+    }
+    
+    // Filter by user/sales rep
+    if (filters.addedBy) {
+      whereConditions.push({
+        FieldName: "added_by_c",
+        Operator: "EqualTo",
+        Values: [parseInt(filters.addedBy)]
+      });
+    }
+    
+    // Filter by search term
+    if (filters.searchTerm) {
+      const searchConditions = [
+        { FieldName: "website_url_c", Operator: "Contains", Values: [filters.searchTerm] },
+        { FieldName: "category_c", Operator: "Contains", Values: [filters.searchTerm] }
+      ];
+      
+      whereConditions.push({
+        operator: "OR",
+        subGroups: searchConditions.map(condition => ({
+          conditions: [condition],
+          operator: "OR"
+        }))
+      });
+    }
+    
+    const params = {
+      fields: [
+        { field: { Name: "website_url_c" } },
+        { field: { Name: "category_c" } },
+        { field: { Name: "team_size_c" } },
+        { field: { Name: "arr_c" } },
+        { field: { Name: "status_c" } },
+        { field: { Name: "funding_type_c" } },
+        { field: { Name: "added_by_c" } },
+        { field: { Name: "added_by_name_c" } },
+        { field: { Name: "created_at_c" } }
+      ],
+      where: whereConditions.length > 0 ? whereConditions : undefined,
+      orderBy: [{ fieldName: "created_at_c", sorttype: "DESC" }]
+    };
+    
+    const response = await apperClient.fetchRecords("lead_c", params);
+    
+    if (!response.success) {
+      console.error(response.message);
+      return { data: [], summary: { totalUrls: 0, totalArr: 0, byStatus: {}, byCategory: {} } };
+    }
+    
+    const transformedData = response.data.map(lead => ({
+      Id: lead.Id,
+      websiteUrl: cleanWebsiteUrl(lead.website_url_c || ''),
+      category: lead.category_c || '',
+      teamSize: lead.team_size_c || '',
+      arr: lead.arr_c || 0,
+      status: lead.status_c || '',
+      fundingType: lead.funding_type_c || '',
+      addedBy: lead.added_by_c || 0,
+      addedByName: lead.added_by_name_c || 'Unknown',
+      createdAt: lead.created_at_c || lead.CreatedOn
+    }));
+    
+    return {
+      data: transformedData,
+      summary: {
+        totalUrls: transformedData.length,
+        totalArr: transformedData.reduce((sum, lead) => sum + (lead.arr || 0), 0),
+        byStatus: getStatusSummary(transformedData),
+        byCategory: getCategorySummary(transformedData)
+      }
+    };
+  } catch (error) {
+    console.error("Error fetching website URL activity:", error?.response?.data?.message || error.message);
+    return { data: [], summary: { totalUrls: 0, totalArr: 0, byStatus: {}, byCategory: {} } };
+  }
 };
 
 // Get activity for a specific date
@@ -111,17 +168,23 @@ export const getQuickDateFilters = () => {
 
 // Get all sales reps for filtering
 export const getSalesRepsForFilter = async () => {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 200));
+  await delay(200);
   
-  return [...salesRepsData];
+  try {
+    const { getSalesReps } = await import('./salesRepService');
+    return await getSalesReps();
+  } catch (error) {
+    console.error("Error fetching sales reps for filter:", error?.response?.data?.message || error.message);
+    return [];
+  }
 };
 
 // Helper functions
 const getStatusSummary = (data) => {
   const summary = {};
   data.forEach(lead => {
-    summary[lead.status] = (summary[lead.status] || 0) + 1;
+    const status = lead.status || 'Unknown';
+    summary[status] = (summary[status] || 0) + 1;
   });
   return summary;
 };
@@ -129,115 +192,75 @@ const getStatusSummary = (data) => {
 const getCategorySummary = (data) => {
   const summary = {};
   data.forEach(lead => {
-    summary[lead.category] = (summary[lead.category] || 0) + 1;
+    const category = lead.category || 'Unknown';
+    summary[category] = (summary[category] || 0) + 1;
   });
   return summary;
 };
 
-// Get daily website URLs for a specific sales rep - only fresh leads
-export const getDailyWebsiteUrls = async (salesRepId, date) => {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 300));
-  
-  const targetDate = new Date(date);
-  let filteredData = [...leadsData];
-  
-  // Filter by sales rep
-  if (salesRepId) {
-    filteredData = filteredData.filter(lead => lead.addedBy === salesRepId);
-  }
-  
-  // Filter by specific date
-  if (date) {
-    filteredData = filteredData.filter(lead => {
-      const leadDate = new Date(lead.createdAt);
-      return leadDate.toDateString() === targetDate.toDateString();
-    });
-  }
-  
-  // If no data found, generate sample data for testing
-  if (filteredData.length === 0 && salesRepId) {
-    filteredData = generateSampleDailyData(salesRepId, targetDate);
-  }
-  
-  // Filter to only include fresh leads that never existed before
-  const freshLeads = await getFreshLeadsOnly(filteredData);
-  
-  // Clean website URLs and return with performance indicator
-  const cleanedData = freshLeads.map(lead => ({
-    ...lead,
-    websiteUrl: cleanWebsiteUrl(lead.websiteUrl)
-  }));
-  
-  return cleanedData;
+// Clean website URL helper function
+const cleanWebsiteUrl = (url) => {
+  if (!url) return '';
+  return url.replace(/^https?:\/\//, '').replace(/\/$/, '');
 };
 
-// Generate sample data for testing Daily Leads Report
-const generateSampleDailyData = (salesRepId, targetDate) => {
-  const salesRep = salesRepsData.find(rep => rep.Id === salesRepId);
-  if (!salesRep) return [];
+// Get daily website URLs for a specific sales rep
+export const getDailyWebsiteUrls = async (salesRepId, date) => {
+  await delay(300);
   
-  const sampleWebsites = [
-    { url: 'https://techstartup.com', category: 'Technology' },
-    { url: 'https://marketing-agency.co', category: 'Marketing' },
-    { url: 'https://ecommerce-store.shop', category: 'E-commerce' },
-    { url: 'https://consulting-firm.biz', category: 'Consulting' },
-    { url: 'https://healthcare-app.io', category: 'Healthcare' },
-    { url: 'https://fintech-solution.net', category: 'Finance' },
-    { url: 'https://education-platform.edu', category: 'Education' },
-    { url: 'https://real-estate-pro.com', category: 'Real Estate' },
-    { url: 'https://food-delivery.app', category: 'Food & Beverage' },
-    { url: 'https://fitness-tracker.fit', category: 'Fitness' },
-    { url: 'https://travel-booking.world', category: 'Travel' },
-    { url: 'https://creative-studio.design', category: 'Design' },
-    { url: 'https://logistics-hub.cargo', category: 'Logistics' },
-    { url: 'https://gaming-platform.play', category: 'Gaming' },
-    { url: 'https://media-streaming.tv', category: 'Media' }
-  ];
-  
-  const statuses = [
-    'New Lead', 'Connected', 'Meeting Booked', 'Meeting Done', 
-    'Rejected', 'Follow-up Required', 'Negotiation', 'Closed Won'
-  ];
-  
-  const fundingTypes = ['Bootstrapped', 'Seed', 'Series A', 'Series B', 'Series C'];
-  
-  // Generate 8-15 sample leads for the selected date
-  const numLeads = Math.floor(Math.random() * 8) + 8;
-  const sampleData = [];
-  
-  for (let i = 0; i < numLeads; i++) {
-    const website = sampleWebsites[i % sampleWebsites.length];
-    const baseUrl = website.url.replace('https://', '');
-    const uniqueUrl = `https://${baseUrl.replace('.', `-${i + 1}.`)}`;
+  try {
+    const apperClient = getApperClient();
     
-    // Create sample lead with realistic data
-    const lead = {
-      Id: Date.now() + i,
-      websiteUrl: uniqueUrl,
-      category: website.category,
-      teamSize: Math.floor(Math.random() * 200) + 10,
-      arr: Math.floor(Math.random() * 5000000) + 100000,
-      status: statuses[Math.floor(Math.random() * statuses.length)],
-      fundingType: fundingTypes[Math.floor(Math.random() * fundingTypes.length)],
-      addedBy: salesRepId,
-      addedByName: salesRep.name,
-      createdAt: new Date(
-        targetDate.getFullYear(),
-        targetDate.getMonth(),
-        targetDate.getDate(),
-        Math.floor(Math.random() * 24), // Random hour
-        Math.floor(Math.random() * 60)  // Random minute
-      ).toISOString(),
-      followUpDate: new Date(
-        targetDate.getTime() + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000
-      ).toISOString()
+    const whereConditions = [];
+    
+    // Filter by sales rep
+    if (salesRepId) {
+      whereConditions.push({
+        FieldName: "added_by_c",
+        Operator: "EqualTo",
+        Values: [parseInt(salesRepId)]
+      });
+    }
+    
+    // Filter by specific date
+    if (date) {
+      whereConditions.push({
+        FieldName: "created_at_c",
+        Operator: "ExactMatch",
+        SubOperator: "Day",
+        Values: [new Date(date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })]
+      });
+    }
+    
+    const params = {
+      fields: [
+        { field: { Name: "website_url_c" } },
+        { field: { Name: "category_c" } },
+        { field: { Name: "status_c" } },
+        { field: { Name: "created_at_c" } }
+      ],
+      where: whereConditions,
+      orderBy: [{ fieldName: "created_at_c", sorttype: "DESC" }]
     };
     
-    sampleData.push(lead);
+    const response = await apperClient.fetchRecords("lead_c", params);
+    
+    if (!response.success) {
+      console.error(response.message);
+      return [];
+    }
+    
+    return response.data.map(lead => ({
+      Id: lead.Id,
+      websiteUrl: cleanWebsiteUrl(lead.website_url_c || ''),
+      category: lead.category_c || '',
+      status: lead.status_c || '',
+      createdAt: lead.created_at_c || lead.CreatedOn
+    }));
+  } catch (error) {
+    console.error("Error fetching daily website URLs:", error?.response?.data?.message || error.message);
+    return [];
   }
-  
-  return sampleData;
 };
 
 // Re-export sales reps for easy access
