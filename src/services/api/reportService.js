@@ -6,15 +6,7 @@ const getApperClient = () => {
     apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
   });
 };
-
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-// Utility function to clean website URLs by removing trailing slash
-const cleanWebsiteUrl = (url) => {
-  if (!url) return url;
-  return url.endsWith('/') ? url.slice(0, -1) : url;
-};
-
 // Get website URL activity with filtering options
 export const getWebsiteUrlActivity = async (filters = {}) => {
   await delay(300);
