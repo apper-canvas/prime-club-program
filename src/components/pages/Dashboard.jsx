@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { getPendingFollowUps } from "@/services/api/leadsService";
 import { getDailyWebsiteUrls, getSalesReps } from "@/services/api/reportService";
 import { getDashboardMetrics, getDetailedRecentActivity, getLeadPerformanceChart, getRecentActivity, getRevenueTrendsData, getTeamPerformanceRankings, getTodaysMeetings } from "@/services/api/dashboardService";
-import { getSalesReps } from "@/services/api/salesRepService";
 import ApperIcon from "@/components/ApperIcon";
 import MetricCard from "@/components/molecules/MetricCard";
 import Loading from "@/components/ui/Loading";
