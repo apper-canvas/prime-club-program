@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { getTeamMemberPerformance, getTeamMembers, inviteTeamMember, removeTeamMember, updateTeamMember } from "@/services/api/teamsService";
 import ApperIcon from "@/components/ApperIcon";
-import Badge from "@/components/atoms/Badge";
-import Avatar from "@/components/atoms/Avatar";
-import Button from "@/components/atoms/Button";
-import Card from "@/components/atoms/Card";
-import Input from "@/components/atoms/Input";
-import Empty from "@/components/ui/Empty";
-import Error from "@/components/ui/Error";
-import Loading from "@/components/ui/Loading";
 import SearchBar from "@/components/molecules/SearchBar";
-import { 
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
+import Empty from "@/components/ui/Empty";
+import Login from "@/components/pages/Login";
+import Badge from "@/components/atoms/Badge";
+import Input, { Input } from "@/components/atoms/Input";
+import Button from "@/components/atoms/Button";
+import Avatar from "@/components/atoms/Avatar";
+import Card from "@/components/atoms/Card";
   getTeamMemberPerformance, 
   getTeamMembers, 
   inviteTeamMember, 
@@ -363,17 +364,17 @@ if (loading) return <Loading />;
                 {/* Member Stats */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
+<div>
                     <p className="text-xs text-gray-500">Last Login</p>
                     <p className="text-sm font-medium text-gray-900">
-                      {member.lastLogin ? new Date(member.lastLogin).toLocaleDateString() : 'Never'}
+                      {member.lastLogin ? new Date(member.lastLogin).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Never'}
                     </p>
                   </div>
                   <div>
                     <p className="text-xs text-gray-500">Joined</p>
                     <p className="text-sm font-medium text-gray-900">
-                      {new Date(member.createdAt).toLocaleDateString()}
+                      {new Date(member.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                     </p>
-                  </div>
                 </div>
               </div>
             </Card>
@@ -849,17 +850,17 @@ const ViewMemberModal = ({ member, onClose, performance, formatCurrency }) => {
               <h5 className="font-medium text-gray-900 mb-3">Account Details</h5>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
+<div className="flex justify-between">
                   <span className="text-gray-500">Joined:</span>
                   <span className="text-gray-900">
-                    {new Date(member.createdAt).toLocaleDateString()}
+                    {new Date(member.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">Last Login:</span>
                   <span className="text-gray-900">
-                    {member.lastLogin ? new Date(member.lastLogin).toLocaleDateString() : 'Never'}
+                    {member.lastLogin ? new Date(member.lastLogin).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Never'}
                   </span>
-                </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">Email:</span>
                   <span className="text-gray-900">{member.email}</span>

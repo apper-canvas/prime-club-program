@@ -937,14 +937,14 @@ emptyRow => <tr key={`empty-${emptyRow.Id}`} className="hover:bg-gray-50 empty-r
 </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap min-w-[130px]">
-                                    <Input
+<Input
                                         type="date"
                                         value={emptyRow.followUpDate ? emptyRow.followUpDate.split('T')[0] : ''}
-                                        onChange={e => handleEmptyRowUpdateDebounced(emptyRow.Id, "followUpDate", e.target.value ? new Date(e.target.value).toISOString() : '')}
-                                        onBlur={e => handleEmptyRowUpdate(emptyRow.Id, "followUpDate", e.target.value ? new Date(e.target.value).toISOString() : '')}
+                                        onChange={e => handleEmptyRowUpdateDebounced(emptyRow.Id, "followUpDate", e.target.value ? new Date(e.target.value + 'T00:00:00.000Z').toISOString() : '')}
+                                        onBlur={e => handleEmptyRowUpdate(emptyRow.Id, "followUpDate", e.target.value ? new Date(e.target.value + 'T00:00:00.000Z').toISOString() : '')}
                                         onKeyDown={e => {
                                             if (e.key === "Enter") {
-                                                handleEmptyRowUpdate(emptyRow.Id, "followUpDate", e.target.value ? new Date(e.target.value).toISOString() : '');
+                                                handleEmptyRowUpdate(emptyRow.Id, "followUpDate", e.target.value ? new Date(e.target.value + 'T00:00:00.000Z').toISOString() : '');
                                             }
                                         }}
                                         className="border-0 bg-transparent p-1 hover:bg-gray-50 focus:bg-white focus:border-gray-300 w-full placeholder-gray-400 text-sm" />
@@ -1102,12 +1102,12 @@ emptyRow => <tr key={`empty-${emptyRow.Id}`} className="hover:bg-gray-50 empty-r
                                     </select>
 </div>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap min-w-[130px]">
+<td className="px-6 py-4 whitespace-nowrap min-w-[130px]">
                                 <Input
                                     type="date"
                                     value={lead.followUpDate ? lead.followUpDate.split('T')[0] : ''}
                                     onChange={e => {
-                                        const newDate = e.target.value ? new Date(e.target.value).toISOString() : '';
+                                        const newDate = e.target.value ? new Date(e.target.value + 'T00:00:00.000Z').toISOString() : '';
                                         setData(prevData => prevData.map(l => l.Id === lead.Id ? {
                                             ...l,
                                             followUpDate: newDate
@@ -1116,12 +1116,12 @@ emptyRow => <tr key={`empty-${emptyRow.Id}`} className="hover:bg-gray-50 empty-r
                                         handleFieldUpdateDebounced(lead.Id, "followUpDate", newDate);
                                     }}
                                     onBlur={e => {
-                                        const newDate = e.target.value ? new Date(e.target.value).toISOString() : '';
+                                        const newDate = e.target.value ? new Date(e.target.value + 'T00:00:00.000Z').toISOString() : '';
                                         handleFieldUpdate(lead.Id, "followUpDate", newDate);
                                     }}
                                     onKeyDown={e => {
                                         if (e.key === "Enter") {
-                                            const newDate = e.target.value ? new Date(e.target.value).toISOString() : '';
+                                            const newDate = e.target.value ? new Date(e.target.value + 'T00:00:00.000Z').toISOString() : '';
                                             handleFieldUpdate(lead.Id, "followUpDate", newDate);
                                         }
                                     }}

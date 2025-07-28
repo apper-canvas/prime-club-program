@@ -11,7 +11,7 @@
     "edition": "Black Edition",
     "addedBy": 1,
     "addedByName": "Sarah Johnson",
-    "createdAt": "2024-12-19T10:30:00Z"
+"createdAt": "2024-12-19T10:30:00.000Z"
   },
 {
     "Id": 2,
@@ -25,7 +25,7 @@
     "edition": "Collector's Edition",
     "addedBy": 2,
     "addedByName": "Mike Davis",
-    "createdAt": "2024-12-19T14:20:00Z"
+"createdAt": "2024-12-19T14:20:00.000Z"
   },
 {
     "Id": 3,
@@ -39,7 +39,7 @@
     "edition": "Limited Edition",
     "addedBy": 3,
     "addedByName": "Tom Wilson",
-    "createdAt": "2024-01-18T09:15:00Z"
+"createdAt": "2024-01-18T09:15:00.000Z"
   },
 {
     "Id": 4,
@@ -53,7 +53,7 @@
     "edition": "Black Edition",
     "addedBy": 4,
     "addedByName": "Emily Chen",
-    "createdAt": "2024-01-20T11:45:00Z"
+"createdAt": "2024-01-20T11:45:00.000Z"
   },
 {
     "Id": 5,
@@ -67,7 +67,7 @@
     "edition": "Collector's Edition",
     "addedBy": 5,
     "addedByName": "Alex Rodriguez",
-    "createdAt": "2024-01-12T16:30:00Z"
+"createdAt": "2024-01-12T16:30:00.000Z"
   },
 {
     "Id": 6,
@@ -81,7 +81,7 @@
     "edition": "Select Edition",
     "addedBy": 1,
     "addedByName": "Sarah Johnson",
-    "createdAt": "2024-01-14T13:20:00Z"
+"createdAt": "2024-01-14T13:20:00.000Z"
   },
 {
     "Id": 7,
@@ -95,7 +95,7 @@
     "edition": "Limited Edition",
     "addedBy": 2,
     "addedByName": "Mike Davis",
-    "createdAt": "2024-01-08T10:00:00Z"
+"createdAt": "2024-01-08T10:00:00.000Z"
   },
   {
     "Id": 8,
@@ -109,7 +109,7 @@
     "edition": "Black Edition",
     "addedBy": 3,
     "addedByName": "Tom Wilson",
-    "createdAt": "2024-12-19T15:10:00Z"
+"createdAt": "2024-12-19T15:10:00.000Z"
   },
   {
     "Id": 9,
@@ -122,7 +122,7 @@
     "fundingType": "Series C",
     "addedBy": 6,
     "addedByName": "Shashank Sharma",
-    "createdAt": "2024-12-19T08:45:00Z"
+"createdAt": "2024-12-19T08:45:00.000Z"
   },
   {
     "Id": 10,
@@ -135,7 +135,7 @@
     "fundingType": "Series A",
     "addedBy": 6,
     "addedByName": "Shashank Sharma",
-    "createdAt": "2024-12-18T14:30:00Z"
+"createdAt": "2024-12-18T14:30:00.000Z"
   },
   {
     "Id": 11,
@@ -148,7 +148,7 @@
     "fundingType": "Bootstrapped",
     "addedBy": 6,
     "addedByName": "Shashank Sharma",
-    "createdAt": "2024-12-17T11:20:00Z"
+"createdAt": "2024-12-17T11:20:00.000Z"
   },
   {
     "Id": 12,
@@ -161,7 +161,7 @@
     "fundingType": "Series A",
     "addedBy": 1,
     "addedByName": "Sarah Johnson",
-    "createdAt": "2024-12-16T09:30:00Z"
+"createdAt": "2024-12-16T09:30:00.000Z"
   },
   {
     "Id": 13,
@@ -174,7 +174,7 @@
     "fundingType": "Series C",
     "addedBy": 2,
     "addedByName": "Mike Davis",
-    "createdAt": "2024-12-15T16:45:00Z"
+"createdAt": "2024-12-15T16:45:00.000Z"
   },
   {
     "Id": 14,
@@ -187,7 +187,7 @@
     "fundingType": "Series B",
     "addedBy": 3,
     "addedByName": "Tom Wilson",
-    "createdAt": "2024-12-14T11:20:00Z"
+"createdAt": "2024-12-14T11:20:00.000Z"
   },
   {
     "Id": 15,
@@ -200,7 +200,7 @@
     "fundingType": "Series B",
     "addedBy": 4,
     "addedByName": "Emily Chen",
-    "createdAt": "2024-12-13T14:10:00Z"
+"createdAt": "2024-12-13T14:10:00.000Z"
   },
   {
     "Id": 16,
@@ -213,7 +213,7 @@
     "fundingType": "Series A",
     "addedBy": 5,
     "addedByName": "Alex Rodriguez",
-    "createdAt": "2024-12-12T08:30:00Z"
+"createdAt": "2024-12-12T08:30:00.000Z"
   },
   {
     "Id": 17,
@@ -226,7 +226,7 @@
     "fundingType": "Series B",
     "addedBy": 6,
     "addedByName": "Shashank Sharma",
-    "createdAt": "2024-12-11T13:45:00Z"
+"createdAt": "2024-12-11T13:45:00.000Z"
   },
   {
     "Id": 18,
@@ -239,7 +239,7 @@
     "fundingType": "Series A",
     "addedBy": 1,
     "addedByName": "Sarah Johnson",
-    "createdAt": "2024-12-10T10:15:00Z"
+"createdAt": "2024-12-10T10:15:00.000Z"
   },
   {
     "Id": 19,
@@ -252,7 +252,7 @@
     "fundingType": "Series C",
     "addedBy": 2,
     "addedByName": "Mike Davis",
-    "createdAt": "2024-12-09T15:20:00Z"
+"createdAt": "2024-12-09T15:20:00.000Z"
   },
   {
     "Id": 20,
@@ -265,7 +265,7 @@
     "fundingType": "Series C",
     "addedBy": 3,
     "addedByName": "Tom Wilson",
-    "createdAt": "2024-11-28T09:30:00Z"
+"createdAt": "2024-11-28T09:30:00.000Z"
   },
   {
     "Id": 21,
@@ -278,7 +278,7 @@
     "fundingType": "Series B",
     "addedBy": 4,
     "addedByName": "Emily Chen",
-    "createdAt": "2024-11-25T12:10:00Z"
+"createdAt": "2024-11-25T12:10:00.000Z"
   },
   {
     "Id": 22,
@@ -291,7 +291,7 @@
     "fundingType": "Series B",
     "addedBy": 5,
     "addedByName": "Alex Rodriguez",
-    "createdAt": "2024-11-20T16:45:00Z"
+"createdAt": "2024-11-20T16:45:00.000Z"
   },
   {
     "Id": 23,
@@ -304,7 +304,7 @@
     "fundingType": "Series A",
     "addedBy": 6,
     "addedByName": "Shashank Sharma",
-    "createdAt": "2024-11-18T11:30:00Z"
+"createdAt": "2024-11-18T11:30:00.000Z"
   },
   {
     "Id": 24,
@@ -317,7 +317,7 @@
     "fundingType": "Series A",
     "addedBy": 1,
     "addedByName": "Sarah Johnson",
-    "createdAt": "2024-11-15T14:20:00Z"
+"createdAt": "2024-11-15T14:20:00.000Z"
   },
   {
     "Id": 25,
@@ -330,7 +330,7 @@
     "fundingType": "Series B",
     "addedBy": 2,
     "addedByName": "Mike Davis",
-    "createdAt": "2024-11-12T08:15:00Z"
+"createdAt": "2024-11-12T08:15:00.000Z"
   },
   {
     "Id": 26,
@@ -343,7 +343,7 @@
     "fundingType": "Series A",
     "addedBy": 3,
     "addedByName": "Tom Wilson",
-    "createdAt": "2024-11-08T13:50:00Z"
+"createdAt": "2024-11-08T13:50:00.000Z"
   },
   {
     "Id": 27,
@@ -356,7 +356,7 @@
     "fundingType": "Bootstrapped",
     "addedBy": 4,
     "addedByName": "Emily Chen",
-    "createdAt": "2024-11-05T10:40:00Z"
+"createdAt": "2024-11-05T10:40:00.000Z"
   },
   {
     "Id": 28,
@@ -369,7 +369,7 @@
     "fundingType": "Series B",
     "addedBy": 5,
     "addedByName": "Alex Rodriguez",
-    "createdAt": "2024-11-02T15:25:00Z"
+"createdAt": "2024-11-02T15:25:00.000Z"
   },
   {
     "Id": 29,
@@ -382,7 +382,7 @@
     "fundingType": "Series C",
     "addedBy": 6,
     "addedByName": "Shashank Sharma",
-    "createdAt": "2024-10-30T09:10:00Z"
+"createdAt": "2024-10-30T09:10:00.000Z"
   },
   {
     "Id": 30,
@@ -395,7 +395,7 @@
     "fundingType": "Series C",
     "addedBy": 1,
     "addedByName": "Sarah Johnson",
-    "createdAt": "2024-10-28T12:35:00Z"
+"createdAt": "2024-10-28T12:35:00.000Z"
   },
   {
     "Id": 31,
@@ -408,7 +408,7 @@
     "fundingType": "Series C",
     "addedBy": 2,
     "addedByName": "Mike Davis",
-    "createdAt": "2024-10-25T16:20:00Z"
+"createdAt": "2024-10-25T16:20:00.000Z"
   },
   {
     "Id": 32,
@@ -421,7 +421,7 @@
     "fundingType": "Series B",
     "addedBy": 3,
     "addedByName": "Tom Wilson",
-    "createdAt": "2024-10-22T11:45:00Z"
+"createdAt": "2024-10-22T11:45:00.000Z"
   },
   {
     "Id": 33,
@@ -434,7 +434,7 @@
     "fundingType": "Series B",
     "addedBy": 4,
     "addedByName": "Emily Chen",
-    "createdAt": "2024-10-18T14:30:00Z"
+"createdAt": "2024-10-18T14:30:00.000Z"
   },
   {
     "Id": 34,
@@ -447,7 +447,7 @@
     "fundingType": "Series A",
     "addedBy": 5,
     "addedByName": "Alex Rodriguez",
-    "createdAt": "2024-10-15T08:50:00Z"
+"createdAt": "2024-10-15T08:50:00.000Z"
   },
   {
     "Id": 35,
@@ -460,7 +460,7 @@
     "fundingType": "Series A",
     "addedBy": 6,
     "addedByName": "Shashank Sharma",
-    "createdAt": "2024-10-12T13:15:00Z"
+"createdAt": "2024-10-12T13:15:00.000Z"
   },
   {
     "Id": 36,
@@ -473,7 +473,7 @@
     "fundingType": "Series B",
     "addedBy": 1,
     "addedByName": "Sarah Johnson",
-    "createdAt": "2024-10-08T10:25:00Z"
+"createdAt": "2024-10-08T10:25:00.000Z"
   },
   {
     "Id": 37,
@@ -486,7 +486,7 @@
     "fundingType": "Series C",
     "addedBy": 2,
     "addedByName": "Mike Davis",
-    "createdAt": "2024-10-05T15:40:00Z"
+"createdAt": "2024-10-05T15:40:00.000Z"
   },
   {
     "Id": 38,
@@ -499,7 +499,7 @@
     "fundingType": "Series C",
     "addedBy": 3,
     "addedByName": "Tom Wilson",
-    "createdAt": "2024-09-28T09:20:00Z"
+"createdAt": "2024-09-28T09:20:00.000Z"
   },
   {
     "Id": 39,
@@ -512,7 +512,7 @@
     "fundingType": "Series C",
     "addedBy": 4,
     "addedByName": "Emily Chen",
-    "createdAt": "2024-09-25T12:55:00Z"
+"createdAt": "2024-09-25T12:55:00.000Z"
   },
   {
     "Id": 40,
@@ -525,6 +525,6 @@
     "fundingType": "Series C",
     "addedBy": 5,
     "addedByName": "Alex Rodriguez",
-    "createdAt": "2024-09-20T16:10:00Z"
+"createdAt": "2024-09-20T16:10:00.000Z"
   }
 ]

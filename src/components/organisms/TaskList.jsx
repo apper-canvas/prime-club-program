@@ -76,11 +76,11 @@ const TaskList = () => {
       case 'completed':
         return task.completed
       case 'pending':
+case 'pending':
         return !task.completed
       case 'overdue':
-        return !task.completed && task.dueDate && new Date(task.dueDate) < new Date()
+        return !task.completed && task.dueDate && new Date(task.dueDate) < new Date().setHours(0,0,0,0)
       default:
-        return true
     }
   })
 

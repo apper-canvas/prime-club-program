@@ -166,11 +166,11 @@ className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm p
 <div className={`flex items-center gap-1 ${
                       isOverdue ? 'text-red-600' : isDueToday ? 'text-yellow-600' : 'text-gray-500'
                     }`}>
-                      <ApperIcon name="Calendar" size={16} />
-                      <span>
-                        {isToday(new Date(task.dueDate)) ? 'Today' : format(new Date(task.dueDate), 'MMM d')}
+<span>
+                        {isToday(new Date(task.dueDate)) ? 'Today' : format(new Date(task.dueDate), 'MMM d, yyyy')}
                       </span>
                     </div>
+                  )}
                   )}
                 </div>
                 

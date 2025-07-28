@@ -10,7 +10,7 @@
     "edition": "Black Edition",
     "startMonth": 1,
     "endMonth": 3,
-    "createdAt": "2024-01-15T10:30:00Z"
+"createdAt": "2024-01-15T10:30:00.000Z"
   },
 {
     "Id": 2,
@@ -23,7 +23,7 @@
     "edition": "Collector's Edition",
     "startMonth": 5,
     "endMonth": 7,
-    "createdAt": "2024-01-10T14:20:00Z"
+"createdAt": "2024-01-10T14:20:00.000Z"
   },
 {
     "Id": 3,
@@ -36,7 +36,7 @@
     "edition": "Limited Edition",
     "startMonth": 2,
     "endMonth": 4,
-    "createdAt": "2024-01-18T09:15:00Z"
+"createdAt": "2024-01-18T09:15:00.000Z"
   },
 {
     "Id": 4,
@@ -49,7 +49,7 @@
     "edition": "Black Edition",
     "startMonth": 3,
     "endMonth": 8,
-    "createdAt": "2024-01-20T11:45:00Z"
+"createdAt": "2024-01-20T11:45:00.000Z"
   },
   {
     "Id": 5,
@@ -62,7 +62,7 @@
     "edition": "Collector's Edition",
     "startMonth": 4,
     "endMonth": 7,
-    "createdAt": "2024-01-12T16:30:00Z"
+"createdAt": "2024-01-12T16:30:00.000Z"
   },
   {
     "Id": 6,
@@ -75,7 +75,7 @@
     "edition": "Select Edition",
     "startMonth": 6,
     "endMonth": 9,
-    "createdAt": "2024-01-14T13:20:00Z"
+"createdAt": "2024-01-14T13:20:00.000Z"
   },
 {
     "Id": 7,
@@ -88,7 +88,7 @@
     "edition": "Limited Edition",
     "startMonth": 8,
     "endMonth": 10,
-    "createdAt": "2024-01-22T15:10:00Z"
+"createdAt": "2024-01-22T15:10:00.000Z"
   },
 {
     "Id": 8,
@@ -101,6 +101,6 @@
     "edition": "Black Edition",
     "startMonth": 9,
     "endMonth": 11,
-    "createdAt": "2024-01-08T10:00:00Z"
+"createdAt": "2024-01-08T10:00:00.000Z"
   }
 ]

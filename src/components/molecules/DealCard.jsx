@@ -82,9 +82,13 @@ const DealCard = ({ deal, index, onEdit }) => {
                 <Avatar name={deal.assignedRep} size="sm" />
                 <span className="ml-2 text-sm text-gray-600">{deal.assignedRep}</span>
               </div>
-              <div className="flex items-center text-xs text-gray-500">
+<div className="flex items-center text-xs text-gray-500">
                 <ApperIcon name="Calendar" size={12} className="mr-1" />
-                <span>{new Date(deal.createdAt).toLocaleDateString()}</span>
+                <span>{new Date(deal.createdAt).toLocaleDateString('en-US', { 
+                  year: 'numeric', 
+                  month: 'short', 
+                  day: 'numeric' 
+                })}</span>
               </div>
             </div>
           </Card>

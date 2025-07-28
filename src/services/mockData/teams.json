@@ -15,9 +15,9 @@
       "contacts": true
     },
     "status": "active",
-    "createdAt": "2024-01-15T10:30:00Z",
-    "updatedAt": "2024-12-19T15:45:00Z",
-    "lastLogin": "2024-12-19T14:30:00Z"
+"createdAt": "2024-01-15T10:30:00.000Z",
+    "updatedAt": "2024-12-19T15:45:00.000Z",
+    "lastLogin": "2024-12-19T14:30:00.000Z"
   },
   {
     "Id": 2,
@@ -35,9 +35,9 @@
       "contacts": true
     },
     "status": "active",
-    "createdAt": "2024-01-20T14:15:00Z",
-    "updatedAt": "2024-12-18T11:20:00Z",
-    "lastLogin": "2024-12-18T16:45:00Z"
+"createdAt": "2024-01-20T14:15:00.000Z",
+    "updatedAt": "2024-12-18T11:20:00.000Z",
+    "lastLogin": "2024-12-18T16:45:00.000Z"
   },
   {
     "Id": 3,
@@ -55,9 +55,9 @@
       "contacts": false
     },
     "status": "active",
-    "createdAt": "2024-02-01T09:45:00Z",
-    "updatedAt": "2024-12-17T16:30:00Z",
-    "lastLogin": "2024-12-17T13:20:00Z"
+"createdAt": "2024-02-01T09:45:00.000Z",
+    "updatedAt": "2024-12-17T16:30:00.000Z",
+    "lastLogin": "2024-12-17T13:20:00.000Z"
   },
   {
     "Id": 4,
@@ -75,8 +75,8 @@
       "contacts": true
     },
     "status": "pending",
-    "createdAt": "2024-03-10T11:20:00Z",
-    "updatedAt": "2024-12-16T14:10:00Z",
+"createdAt": "2024-03-10T11:20:00.000Z",
+    "updatedAt": "2024-12-16T14:10:00.000Z",
     "lastLogin": null
   }
 ]

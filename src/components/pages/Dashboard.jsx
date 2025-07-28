@@ -3,29 +3,20 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Chart from "react-apexcharts";
 import { toast } from "react-toastify";
+import { getPendingFollowUps } from "@/services/api/leadsService";
+import { getDailyWebsiteUrls, getSalesReps } from "@/services/api/reportService";
+import { getDashboardMetrics, getDashboardPendingFollowUps, getDetailedRecentActivity, getLeadPerformanceChart, getRecentActivity, getRevenueTrendsData, getTeamPerformanceRankings, getTodaysMeetings } from "@/services/api/dashboardService";
+import { getSalesReps } from "@/services/api/salesRepService";
 import ApperIcon from "@/components/ApperIcon";
+import MetricCard from "@/components/molecules/MetricCard";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
+import Pipeline from "@/components/pages/Pipeline";
+import Analytics from "@/components/pages/Analytics";
+import Leads from "@/components/pages/Leads";
 import Badge from "@/components/atoms/Badge";
 import Button from "@/components/atoms/Button";
 import Card from "@/components/atoms/Card";
-import Error from "@/components/ui/Error";
-import Loading from "@/components/ui/Loading";
-import Analytics from "@/components/pages/Analytics";
-import Pipeline from "@/components/pages/Pipeline";
-import Leads from "@/components/pages/Leads";
-import MetricCard from "@/components/molecules/MetricCard";
-import { getSalesReps } from "@/services/api/salesRepService";
-import { getDailyWebsiteUrls } from "@/services/api/reportService";
-import { getPendingFollowUps } from "@/services/api/leadsService";
-import { 
-  getDashboardMetrics, 
-  getDetailedRecentActivity, 
-  getLeadPerformanceChart, 
-  getPendingFollowUps as getDashboardPendingFollowUps, 
-  getRecentActivity, 
-  getRevenueTrendsData, 
-  getTeamPerformanceRankings, 
-  getTodaysMeetings 
-} from "@/services/api/dashboardService";
 const Dashboard = () => {
   const navigate = useNavigate();
   const [metrics, setMetrics] = useState([]);
@@ -381,8 +372,12 @@ useEffect(() => {
                       >
                         {url.status}
                       </Badge>
-                      <div className="text-xs text-gray-500">
-                        {new Date(url.createdAt).toLocaleDateString()}
+<div className="text-xs text-gray-500">
+                        {new Date(url.createdAt).toLocaleDateString('en-US', { 
+                          year: 'numeric', 
+                          month: 'short', 
+                          day: 'numeric' 
+                        })}
                       </div>
                     </div>
                   </motion.div>
@@ -495,9 +490,12 @@ useEffect(() => {
                       {followUp.websiteUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}
                     </div>
                     <div className="text-xs text-gray-500">{followUp.category}</div>
-                  </div>
-                  <div className="text-xs font-medium text-primary-600">
-                    {new Date(followUp.followUpDate).toLocaleDateString()}
+<div className="text-xs font-medium text-primary-600">
+                    {new Date(followUp.followUpDate).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'short', 
+                      day: 'numeric' 
+                    })}
                   </div>
                 </div>
               </motion.div>
