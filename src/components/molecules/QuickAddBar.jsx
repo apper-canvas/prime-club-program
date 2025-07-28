@@ -85,8 +85,8 @@ return (
         </div>
 
         {/* Expanded Fields */}
-        {isExpanded && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 border-t border-white/30">
+{isExpanded && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 border-t border-white/30 max-h-48 overflow-y-auto">
             {/* Due Date */}
             <div>
               <label className="block text-xs font-medium text-white mb-1">
