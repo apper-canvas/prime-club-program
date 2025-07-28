@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-toastify";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
-import Input from "@/components/atoms/Input";
 import ApperIcon from "@/components/ApperIcon";
+import Input from "@/components/atoms/Input";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
 
 const DealEditModal = ({ isOpen, onClose, deal, onSave }) => {
   const [formData, setFormData] = useState({
@@ -164,10 +164,10 @@ const DealEditModal = ({ isOpen, onClose, deal, onSave }) => {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-2xl h-[90vh] max-h-[90vh] overflow-hidden"
           >
-            <Card className="p-6">
-              <div className="flex items-center justify-between mb-6">
+<Card className="h-full flex flex-col">
+              <div className="flex items-center justify-between p-6 border-b border-gray-200 flex-shrink-0">
                 <h2 className="text-2xl font-bold text-gray-900">Edit Deal</h2>
                 <button
                   onClick={handleClose}
@@ -178,8 +178,9 @@ const DealEditModal = ({ isOpen, onClose, deal, onSave }) => {
                 </button>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div className="flex-1 overflow-y-auto p-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
+<form id="deal-edit-form" onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Deal Name *
@@ -323,31 +324,33 @@ const DealEditModal = ({ isOpen, onClose, deal, onSave }) => {
                   </div>
                 </div>
 
-                <div className="flex justify-end gap-3 pt-6 border-t border-gray-200">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={handleClose}
-                    disabled={isSubmitting}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="min-w-[120px]"
-                  >
-                    {isSubmitting ? (
-                      <div className="flex items-center">
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                        Saving...
-                      </div>
-                    ) : (
-                      "Save Changes"
-                    )}
-                  </Button>
-                </div>
-              </form>
+</form>
+              </div>
+              <div className="flex justify-end gap-3 p-6 border-t border-gray-200 flex-shrink-0 bg-white">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleClose}
+                  disabled={isSubmitting}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  form="deal-edit-form"
+                  disabled={isSubmitting}
+                  className="min-w-[120px]"
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center">
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                      Saving...
+                    </div>
+                  ) : (
+                    "Save Changes"
+                  )}
+                </Button>
+              </div>
             </Card>
           </motion.div>
         </div>
