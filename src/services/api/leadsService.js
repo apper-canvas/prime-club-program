@@ -15,6 +15,19 @@ const cleanWebsiteUrl = (url) => {
   return url.replace(/^https?:\/\//, '').replace(/\/$/, '');
 };
 
+// Utility function to format dates for API (Date fields need YYYY-MM-DD format)
+const formatDateForAPI = (date) => {
+  if (!date) return null;
+  if (typeof date === 'string' && date.includes('T')) {
+    // If it's an ISO string, extract just the date part
+    return date.split('T')[0];
+  }
+  if (date instanceof Date) {
+    return date.toISOString().split('T')[0];
+  }
+  // If it's already in YYYY-MM-DD format, return as is
+  return date;
+};
 export const getLeads = async () => {
   await delay(400);
   
@@ -159,9 +172,9 @@ const params = {
         status_c: leadData.status || "Keep an Eye",
         funding_type_c: leadData.fundingType || "Bootstrapped",
         edition_c: leadData.edition || "Select Edition",
-        follow_up_date_c: leadData.followUpDate || null,
+        follow_up_date_c: formatDateForAPI(leadData.followUpDate),
         added_by_name_c: "Current User",
-        created_at_c: new Date().toISOString().slice(0, 19)
+        created_at_c: new Date().toISOString() // DateTime field can use full ISO format
       }]
     };
     
@@ -205,7 +218,7 @@ export const updateLead = async (id, updates) => {
   try {
     const apperClient = getApperClient();
     
-    const recordData = {};
+const recordData = {};
     if (updates.name !== undefined) recordData.Name = updates.name;
     if (updates.websiteUrl !== undefined) recordData.website_url_c = updates.websiteUrl;
     if (updates.teamSize !== undefined) recordData.team_size_c = updates.teamSize;
@@ -215,8 +228,7 @@ export const updateLead = async (id, updates) => {
     if (updates.status !== undefined) recordData.status_c = updates.status;
     if (updates.fundingType !== undefined) recordData.funding_type_c = updates.fundingType;
     if (updates.edition !== undefined) recordData.edition_c = updates.edition;
-    if (updates.followUpDate !== undefined) recordData.follow_up_date_c = updates.followUpDate;
-    
+    if (updates.followUpDate !== undefined) recordData.follow_up_date_c = formatDateForAPI(updates.followUpDate);
     const params = {
       records: [{
         Id: id,
@@ -357,7 +369,7 @@ export const getDailyLeadsReport = async () => {
 export const getPendingFollowUps = async () => {
   await delay(300);
   
-  try {
+try {
     const apperClient = getApperClient();
     
     // Get current date and 7 days from now
@@ -372,8 +384,8 @@ export const getPendingFollowUps = async () => {
         { field: { Name: "follow_up_date_c" } }
       ],
       where: [
-        { FieldName: "follow_up_date_c", Operator: "GreaterThanOrEqualTo", Values: [now.toISOString()] },
-        { FieldName: "follow_up_date_c", Operator: "LessThanOrEqualTo", Values: [sevenDaysFromNow.toISOString()] }
+        { FieldName: "follow_up_date_c", Operator: "GreaterThanOrEqualTo", Values: [formatDateForAPI(now)] },
+        { FieldName: "follow_up_date_c", Operator: "LessThanOrEqualTo", Values: [formatDateForAPI(sevenDaysFromNow)] }
       ],
       orderBy: [{ fieldName: "follow_up_date_c", sorttype: "ASC" }]
     };
