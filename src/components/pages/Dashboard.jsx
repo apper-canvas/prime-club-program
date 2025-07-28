@@ -5,7 +5,6 @@ import Chart from "react-apexcharts";
 import { toast } from "react-toastify";
 import { getDailyWebsiteUrls, getSalesReps } from "@/services/api/reportService";
 import { getDashboardMetrics, getDashboardPendingFollowUps, getDetailedRecentActivity, getLeadPerformanceChart, getRecentActivity, getRevenueTrendsData, getTeamPerformanceRankings, getTodaysMeetings } from "@/services/api/dashboardService";
-import { getSalesReps } from "@/services/api/salesRepService";
 import ApperIcon from "@/components/ApperIcon";
 import MetricCard from "@/components/molecules/MetricCard";
 import Loading from "@/components/ui/Loading";
