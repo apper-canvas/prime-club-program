@@ -179,8 +179,7 @@ const DealEditModal = ({ isOpen, onClose, deal, onSave }) => {
               </div>
 
 <div className="flex-1 overflow-y-auto p-6">
-                <form onSubmit={handleSubmit} className="space-y-6">
-<form id="deal-edit-form" onSubmit={handleSubmit} className="space-y-6">
+                <form id="deal-edit-form" onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Deal Name *
@@ -321,10 +320,9 @@ const DealEditModal = ({ isOpen, onClose, deal, onSave }) => {
                     {errors.endMonth && (
                       <p className="text-red-500 text-sm mt-1">{errors.endMonth}</p>
                     )}
+)}
                   </div>
-                </div>
-
-</form>
+                </form>
               </div>
               <div className="flex justify-end gap-3 p-6 border-t border-gray-200 flex-shrink-0 bg-white">
                 <Button
