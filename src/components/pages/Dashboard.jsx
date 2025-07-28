@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Chart from "react-apexcharts";
 import { toast } from "react-toastify";
-import { getDailyWebsiteUrls, getSalesReps } from "@/services/api/reportService";
+import { getDailyWebsiteUrls } from "@/services/api/reportService";
 import { getDashboardMetrics, getDashboardPendingFollowUps, getDetailedRecentActivity, getLeadPerformanceChart, getRecentActivity, getRevenueTrendsData, getTeamPerformanceRankings, getTodaysMeetings } from "@/services/api/dashboardService";
+import { getSalesReps } from "@/services/api/salesRepService";
 import ApperIcon from "@/components/ApperIcon";
 import MetricCard from "@/components/molecules/MetricCard";
 import Loading from "@/components/ui/Loading";
@@ -486,9 +487,9 @@ useEffect(() => {
                   <div className="flex-1">
                     <div className="font-medium text-gray-900 text-sm">
                       {followUp.websiteUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}
-                    </div>
-                    <div className="text-xs text-gray-500">{followUp.category}</div>
-<div className="text-xs font-medium text-primary-600">
+<div className="text-xs text-gray-500">{followUp.category}</div>
+                  </div>
+                  <div className="text-xs font-medium text-primary-600">
                     {new Date(followUp.followUpDate).toLocaleDateString('en-US', { 
                       year: 'numeric', 
                       month: 'short', 
