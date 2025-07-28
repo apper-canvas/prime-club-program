@@ -148,7 +148,7 @@ export const createLead = async (leadData) => {
       throw new Error(`A lead with website URL "${leadData.websiteUrl}" already exists`);
     }
     
-    const params = {
+const params = {
       records: [{
         Name: leadData.websiteUrl || '',
         website_url_c: leadData.websiteUrl || '',
@@ -161,7 +161,7 @@ export const createLead = async (leadData) => {
         edition_c: leadData.edition || "Select Edition",
         follow_up_date_c: leadData.followUpDate || null,
         added_by_name_c: "Current User",
-        created_at_c: new Date().toISOString()
+        created_at_c: new Date().toISOString().slice(0, 19)
       }]
     };
     
