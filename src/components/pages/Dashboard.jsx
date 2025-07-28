@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Chart from "react-apexcharts";
 import { toast } from "react-toastify";
-import { getPendingFollowUps } from "@/services/api/leadsService";
 import { getDailyWebsiteUrls, getSalesReps } from "@/services/api/reportService";
 import { getDashboardMetrics, getDashboardPendingFollowUps, getDetailedRecentActivity, getLeadPerformanceChart, getRecentActivity, getRevenueTrendsData, getTeamPerformanceRankings, getTodaysMeetings } from "@/services/api/dashboardService";
 import { getSalesReps } from "@/services/api/salesRepService";

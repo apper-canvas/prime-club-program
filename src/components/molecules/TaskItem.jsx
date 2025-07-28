@@ -162,7 +162,7 @@ className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm p
                     </div>
                   )}
                   
-                  {task.dueDate && (
+{task.dueDate && (
 <div className={`flex items-center gap-1 ${
                       isOverdue ? 'text-red-600' : isDueToday ? 'text-yellow-600' : 'text-gray-500'
                     }`}>
@@ -170,7 +170,6 @@ className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm p
                         {isToday(new Date(task.dueDate)) ? 'Today' : format(new Date(task.dueDate), 'MMM d, yyyy')}
                       </span>
                     </div>
-                  )}
                   )}
                 </div>
                 

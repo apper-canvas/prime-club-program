@@ -9,17 +9,10 @@ import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
 import Login from "@/components/pages/Login";
 import Badge from "@/components/atoms/Badge";
-import Input, { Input } from "@/components/atoms/Input";
+import Input from "@/components/atoms/Input";
 import Button from "@/components/atoms/Button";
 import Avatar from "@/components/atoms/Avatar";
 import Card from "@/components/atoms/Card";
-  getTeamMemberPerformance, 
-  getTeamMembers, 
-  inviteTeamMember, 
-  removeTeamMember, 
-  updateTeamMember 
-} from "@/services/api/teamsService";
-
 const TeamManagement = () => {
   const [teamMembers, setTeamMembers] = useState([]);
   const [availableRoles, setAvailableRoles] = useState([]);
@@ -362,9 +355,8 @@ if (loading) return <Loading />;
                 </div>
 
                 {/* Member Stats */}
-                <div className="grid grid-cols-2 gap-4">
+<div className="grid grid-cols-2 gap-4">
                   <div>
-<div>
                     <p className="text-xs text-gray-500">Last Login</p>
                     <p className="text-sm font-medium text-gray-900">
                       {member.lastLogin ? new Date(member.lastLogin).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Never'}
@@ -373,12 +365,13 @@ if (loading) return <Loading />;
                   <div>
                     <p className="text-xs text-gray-500">Joined</p>
                     <p className="text-sm font-medium text-gray-900">
-                      {new Date(member.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+{new Date(member.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                     </p>
+                  </div>
                 </div>
               </div>
             </Card>
-</motion.div>
+          </motion.div>
         ))}
       </div>
 
@@ -848,9 +841,8 @@ const ViewMemberModal = ({ member, onClose, performance, formatCurrency }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="p-4">
               <h5 className="font-medium text-gray-900 mb-3">Account Details</h5>
-              <div className="space-y-2 text-sm">
+<div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-<div className="flex justify-between">
                   <span className="text-gray-500">Joined:</span>
                   <span className="text-gray-900">
                     {new Date(member.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
@@ -861,6 +853,7 @@ const ViewMemberModal = ({ member, onClose, performance, formatCurrency }) => {
                   <span className="text-gray-900">
                     {member.lastLogin ? new Date(member.lastLogin).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Never'}
                   </span>
+                </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">Email:</span>
                   <span className="text-gray-900">{member.email}</span>
